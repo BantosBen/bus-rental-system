@@ -27,6 +27,7 @@
     <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet" />
     <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet" />
     <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 
     <!-- Template Main CSS File -->
     <link href="assets/css/style.css" rel="stylesheet" />
@@ -48,7 +49,7 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
                             <div class="d-flex justify-content-center py-4">
-                                <a href="index.html" class="logo d-flex align-items-center w-auto">
+                                <a href="login.php" class="logo d-flex align-items-center w-auto">
                                     <img src="assets/img/logo.png" alt="" />
                                     <span class="d-none d-lg-block">Safe Route</span>
                                 </a>
@@ -98,7 +99,7 @@
                                         <div class="col-12">
                                             <p class="small mb-0">
                                                 Don't have account?
-                                                <a href="register.html">Create an account</a>
+                                                <a href="register.php">Create an account</a>
                                             </p>
                                         </div>
                                     </form>
@@ -162,11 +163,13 @@
         $('#loadingModal').modal('hide');
     }
 
-    $(document).ready(function() {
+    function login() {
+        showLoadingModal();
+
         $.ajax({
             type: "POST",
-            url: "include/controllers/auth_controller.php",
-            data: this.serialize(), // serialize the form data and send it to the PHP script
+            url: "includes/controllers/auth_controller.php",
+            data: $('#auth-form').serialize(), // serialize the form data and send it to the PHP script
             dataType: "json",
             success: function(response) {
                 hideLoadingModal();
@@ -183,6 +186,7 @@
                         }
                     }, 500);
                 } else {
+                    console.log("ERROR: " + response.message);
                     toastr.error(
                         response.message
                     );
@@ -194,6 +198,15 @@
                 console.log('Response text:', xhr.responseText);
                 toastr.error('Error! Failed to scan product');
             }
+        });
+
+    }
+
+    $(document).ready(function() {
+        $('#auth-form').submit(function(event) { // assuming the form has id "my-form"
+            event.preventDefault(); // prevent the form from submitting in the default way
+            //toastr.info('Scanning item order...');
+            login();
         });
     });
     </script>

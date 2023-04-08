@@ -29,6 +29,8 @@ class Auth
                 $message['id'] = $user['id'];
                 $message['is_customer'] = true;
 
+                $this->createSession($user['id'], true);
+
             } else {
                 $message['error'] = true;
                 $message['message'] = "Invalid password. Check and try again.";
@@ -49,6 +51,8 @@ class Auth
                     $message['message'] = "Successfully login";
                     $message['id'] = $user['id'];
                     $message['is_customer'] = false;
+
+                    $this->createSession($user['id'], false);
 
                 } else {
                     $message['error'] = true;
@@ -145,5 +149,11 @@ class Auth
         $result = $this->connection->query($sql);
 
         return $result > 0;
+    }
+
+    private function createSession($id, $isCustomer)
+    {
+        $_SESSION['id'] = $id;
+        $_SESSION['isCustomer'] = $isCustomer;
     }
 }

@@ -10,6 +10,6 @@ class Database
     public function __construct()
     {
         session_start();
-        $this->connection = new mysqli("localhost", "root", "", "bus_rental_system");
+        $this->connection = new mysqli("localhost", "gloyaldi_saferoute", "123saferoute!@#", "gloyaldi_saferoute");
     }
 }

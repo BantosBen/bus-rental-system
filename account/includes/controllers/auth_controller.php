@@ -1,6 +1,6 @@
 <?php
 
-require_once 'include/auth.php';
+require_once '../classes/auth.php';
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $response = $auth->login($email, $password);
 
         echo json_encode($response);
-        
+
     } else if ($form_type === 'signup') {
         // Handle the sign up form submission
     }
