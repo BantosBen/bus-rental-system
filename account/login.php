@@ -66,7 +66,8 @@
                                         </p>
                                     </div>
 
-                                    <form class="row g-3 needs-validation" novalidate>
+                                    <form class="row g-3 needs-validation" id="auth-form" novalidate>
+                                        <input type="hidden" name="form-type" value="login">
                                         <div class="col-12">
                                             <label for="yourEmail" class="form-label">
                                                 Email
@@ -112,12 +113,31 @@
                 </div>
             </section>
         </div>
+        <div class="modal" id="loadingModal" data-backdrop="static">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="row justify-content-center">
+                            <div class="col-md-8 d-flex justify-content-center">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                                <p class="mt-2 mx-2">Authenticating. Please wait...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
     <!-- End #main -->
 
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center">
         <i class="bi bi-arrow-up-short"></i>
     </a>
+
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
     <!-- Vendor JS Files -->
     <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
@@ -131,6 +151,52 @@
 
     <!-- Template Main JS File -->
     <script src="assets/js/main.js"></script>
+    <script>
+    // Show the loading modal
+    function showLoadingModal() {
+        $('#loadingModal').modal('show');
+    }
+
+    // Hide the loading modal
+    function hideLoadingModal() {
+        $('#loadingModal').modal('hide');
+    }
+
+    $(document).ready(function() {
+        $.ajax({
+            type: "POST",
+            url: "include/controllers/auth_controller.php",
+            data: this.serialize(), // serialize the form data and send it to the PHP script
+            dataType: "json",
+            success: function(response) {
+                hideLoadingModal();
+                console.log(response);
+                if (!response.error) {
+                    toastr.success(
+                        response.message
+                    );
+                    setTimeout(function() {
+                        if (response.is_customer) {
+                            window.location.href = 'dashboard.php';
+                        } else {
+                            window.location.href = 'admin/dashboard.php';
+                        }
+                    }, 500);
+                } else {
+                    toastr.error(
+                        response.message
+                    );
+                }
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                hideLoadingModal();
+                console.error('Error submitting data:', errorThrown);
+                console.log('Response text:', xhr.responseText);
+                toastr.error('Error! Failed to scan product');
+            }
+        });
+    });
+    </script>
 </body>
 
 </html>
