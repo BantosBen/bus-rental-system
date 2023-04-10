@@ -15,30 +15,30 @@ class Auth
     public function login($email, $password)
     {
         $message = [];
-        $sql = "SELECT * FROM `customer` WHERE `email` = '$email'";
-        $result = $this->connection->query($sql);
+        $sql_raw = "SELECT * FROM `customer` WHERE `email_address` = '$email'";
+        $result = $this->connection->query($sql_raw);
 
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 $user = $row;
             }
 
-            if (password_verify($password, $user['password'])) {
+            if (password_verify($password, $user['customer_password'])) {
                 $message['error'] = false;
                 $message['message'] = "Successfully login";
-                $message['id'] = $user['id'];
+                $message['id'] = $user['customer_id'];
                 $message['is_customer'] = true;
 
-                $this->createSession($user['id'], true);
+                $this->createSession($user['customer_id'], true);
 
             } else {
                 $message['error'] = true;
-                $message['message'] = "Invalid password. Check and try again.";
+                $message['message'] = "Invalid password. Check and try again.$password," . $user['customer_password'] . "";
 
             }
 
         } else {
-            $sql = "SELECT * FROM `login` WHERE `email` = '$email'";
+            $sql = "SELECT * FROM `login` WHERE `email_address` = '$email'";
             $result = $this->connection->query($sql);
 
             if ($result->num_rows > 0) {
@@ -49,10 +49,10 @@ class Auth
                 if (password_verify($password, $user['password'])) {
                     $message['error'] = false;
                     $message['message'] = "Successfully login";
-                    $message['id'] = $user['id'];
+                    $message['id'] = $user['user_id'];
                     $message['is_customer'] = false;
 
-                    $this->createSession($user['id'], false);
+                    $this->createSession($user['user_id'], false);
 
                 } else {
                     $message['error'] = true;

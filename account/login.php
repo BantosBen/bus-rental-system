@@ -121,7 +121,6 @@
                         <div class="row justify-content-center">
                             <div class="col-md-8 d-flex justify-content-center">
                                 <div class="spinner-border text-primary" role="status">
-                                    <span class="sr-only">Loading...</span>
                                 </div>
                                 <p class="mt-2 mx-2">Authenticating. Please wait...</p>
                             </div>

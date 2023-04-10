@@ -16,6 +16,21 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         echo json_encode($response);
 
     } else if ($form_type === 'signup') {
-        // Handle the sign up form submission
+        $user = [];
+
+        $user['first_name'] = $_POST['first_name'];
+        $user['last_name'] = $_POST['second_name'];
+        $user['password'] = $_POST['password'];
+        $user['email'] = $_POST['email'];
+        $user['address'] = $_POST['address'];
+        $user['phone'] = $_POST['phone'];
+        $user['city'] = $_POST['city'];
+        $user['state'] = $_POST['state'];
+        $user['zip'] = $_POST['zip'];
+
+        $response = $auth->createCustomerAccount($user);
+
+        echo json_encode($response);
+
     }
 }
