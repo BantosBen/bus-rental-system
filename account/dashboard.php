@@ -30,17 +30,6 @@
     <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet" />
     <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet" />
 
-    <!-- Datepicker CSS -->
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
-
-
-    <!-- Timepicker CSS -->
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-timepicker/0.5.2/css/bootstrap-timepicker.min.css">
-
-
-
     <!-- Template Main CSS File -->
     <link href="assets/css/style.css" rel="stylesheet" />
 
@@ -184,6 +173,7 @@
                     <div class="row gy-4">
                         <?php
 foreach ($buses as $bus) {
+    $buttonStatus = ($bus['availability'] == 1) ? '' : 'disabled';
     echo '<div class="col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="200">
                             <div class="card mb-3">
                                 <div class="card-img">
@@ -243,9 +233,9 @@ foreach ($buses as $bus) {
 
     echo ($bus['availability'] == 1) ? '<i class="bi bi-circle-fill" style="color: green;"></i> Available' : '<i class="bi bi-circle-fill" style="color: red;"></i> Unavailable';
     echo '</p></div></div><div class="row mt-3">
-                            <button type="button" class="btn btn-block btn-outline-primary btn-sm" id="btn-' . $bus['bus_id'] . '">
+                            <a ' . $buttonStatus . ' href="make-reservation.php?id=' . $bus['bus_id'] . '&fee=' . $bus['fee'] . '&bus=' . $bus['bus_type'] . ' ' . $bus['manufacturer'] . '" type="button" class="btn btn-block btn-outline-primary btn-sm" id="btn-' . $bus['bus_id'] . '">
                                 Book Now
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -351,77 +341,6 @@ foreach ($buses as $bus) {
                 <!-- End Right side columns -->
             </div>
         </section>
-        <?php
-foreach ($buses as $bus) {
-    echo '<div class="modal fade" id="modal-' . $bus['bus_id'] . '" tabindex="-1">
-                <div class="modal-dialog modal-dialog-scrollable">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title">Modal Dialog Scrollable</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                    <form class="row g-3">
-                <input type="hidden" name="bus_id" value="' . $bus['bus_id'] . '">
-                <div class="col-md-12">
-                  <div class="form-floating">
-                    <input type="text" class="form-control" id="floatingBusName" placeholder="Bus Name" disabled value="' . $bus['bus_type'] . ' ' . $bus['manufacturer'] . '">
-                    <label for="floatingBusName">Bus Name</label>
-                  </div>
-                </div>
-                <div class="col-md-12">
-                  <div class="form-floating">
-                    <input type="text" class="form-control" id="floatingBusFee" placeholder="Daily Charges" disabled value="' . $bus['fee'] . '">
-                    <label for="floatingBusFee">Daily Charges</label>
-                  </div>
-                </div>
-                <div class="col-md-12">
-                  <div class="form-floating">
-                  <input type="text" id="floatingDeptDate" class="form-control datepicker" data-provide="datepicker">
-                    <label for="floatingDeptDate">Departure Date</label>
-                  </div>
-                </div>
-                <div class="col-md-12">
-                  <div class="form-floating">
-                    <input type="text" id="floatingDeptTime" class="form-control timepicker" data-provide="timepicker">
-                    <label for="floatingDeptTime">Departure Time</label>
-                  </div>
-                </div>
-                <div class="col-md-12">
-                  <div class="form-floating">
-                  <input type="text" id="floatingArrDate" class="form-control datepicker" data-provide="datepicker">
-                    <label for="floatingArrDate">Arrival Date</label>
-                  </div>
-                </div>
-                <div class="col-md-12">
-                  <div class="form-floating">
-                    <input type="text" id="floatingArrTime" class="form-control timepicker" data-provide="timepicker">
-                    <label for="floatingArrTime">Arrival Time</label>
-                  </div>
-                </div>
-                <div class="col-md-12">
-                  <div class="form-floating">
-                    <input type="text" class="form-control" id="floatingDept" placeholder="Departure Location">
-                    <label for="floatingDept">Departure Location</label>
-                  </div>
-                </div>
-                <div class="col-12">
-                  <div class="form-floating">
-                    <input class="form-control" placeholder="Arrival Location" id="floatingArrival">
-                    <label for="floatingArrival">Arrival Location</label>
-                  </div>
-                </div>
-
-                <div class="col-12 text-center">
-                  <button type="submit" class="btn btn-primary">Make Reservation</button>
-                </div>
-              </form>
-                    </div>
-                  </div>
-                </div>
-              </div>';
-}
-?>
     </main>
     <!-- End #main -->
 
@@ -444,11 +363,6 @@ foreach ($buses as $bus) {
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-
-    <!-- Bootstrap JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
     <!-- Datepicker JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js">
     </script>
@@ -462,7 +376,7 @@ foreach ($buses as $bus) {
 
     <!-- Vendor JS Files -->
     <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
-    <!-- <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="assets/vendor/chart.js/chart.min.js"></script>
     <script src="assets/vendor/echarts/echarts.min.js"></script>
     <script src="assets/vendor/quill/quill.min.js"></script>
@@ -472,33 +386,6 @@ foreach ($buses as $bus) {
 
     <!-- Template Main JS File -->
     <script src="assets/js/main.js"></script>
-
-    <script>
-    $(document).ready(function() {
-        $('.timepicker').timepicker();
-        $('.timepicker').timepicker({
-            minuteStep: 15
-        });
-
-        $('.datepicker').datepicker();
-        $('.datepicker').datepicker({
-            format: 'yyyy-mm-dd'
-        });
-
-
-        // loop through buttons and add click event listener to each button
-        var buttons = document.querySelectorAll('button[id^="btn-"]');
-        buttons.forEach(function(button) {
-            button.addEventListener('click', function() {
-                // extract the unique identifier from the button id
-                var id = this.id.split('-')[1];
-                // get the corresponding modal and display it
-                var modal = document.getElementById('modal-' + id);
-                modal.style.display = 'block';
-            });
-        });
-    });
-    </script>
 </body>
 
 </html>

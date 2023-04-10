@@ -195,7 +195,7 @@
                 hideLoadingModal();
                 console.error('Error submitting data:', errorThrown);
                 console.log('Response text:', xhr.responseText);
-                toastr.error('Error! Failed to scan product');
+                toastr.error('Error! Something went wrong kindly try again later');
             }
         });
 

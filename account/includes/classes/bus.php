@@ -26,4 +26,10 @@ class Bus
             return null;
         }
     }
+
+    public function updateAvailability($busID, $availability)
+    {
+        $sql = "UPDATE bus SET availability = $availability WHERE bus_id = $busID";
+        $this->$this->connection->query($sql);
+    }
 }

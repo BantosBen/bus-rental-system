@@ -1,6 +1,7 @@
 <?php
 
 require_once '../classes/auth.php';
+require_once '../classes/bus.php';
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
