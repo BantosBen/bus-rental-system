@@ -15,7 +15,7 @@ class Bus
 
     public function getAllBuses()
     {
-        $sql = "SELECT * FROM `bus`";
+        $sql = "SELECT * FROM `bus` ORDER BY RAND()";
         $result = $this->connection->query($sql);
 
         $buses = [];
@@ -33,5 +33,22 @@ class Bus
     {
         $sql = "UPDATE `bus` SET availability = $availability WHERE bus_id = $busID";
         $this->connection->query($sql);
+    }
+
+    public function getTopBuses()
+    {
+        $sql = "SELECT * FROM `bus` ORDER BY RAND() LIMIT 3;";
+        $result = $this->connection->query($sql);
+
+        $buses = [];
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                array_push($buses, $row);
+            }
+            return $buses;
+        } else {
+            return null;
+        }
+
     }
 }
