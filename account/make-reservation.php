@@ -167,11 +167,12 @@
 
     <main id="main" class="main">
         <div class="pagetitle">
-            <h1>Dashboard</h1>
+            <h1>Make Reservation</h1>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                    <li class="breadcrumb-item active">Dashboard</li>
+                    <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
+                    <li class="breadcrumb-item active">Make Reservation
+                    </li>
                 </ol>
             </nav>
         </div>
@@ -193,9 +194,8 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control" id="floatingBusFee"
-                                            placeholder="Daily Charges" disabled value="<?php echo $busFee; ?>"
-                                            name="fee">
+                                        <input name="fee" type="text" class="form-control" id="floatingBusFee"
+                                            placeholder="Daily Charges" disabled value="<?php echo $busFee; ?>">
                                         <label for="floatingBusFee">Daily Charges ($)</label>
                                     </div>
                                 </div>
