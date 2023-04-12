@@ -64,7 +64,7 @@ $fullName = $first_name . ' ' . $second_name;
                     </li>
 
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="profile.html">
+                        <a class="dropdown-item d-flex align-items-center" href="profile.php">
                             <i class="bi bi-person"></i>
                             <span>My Profile</span>
                         </a>
@@ -73,7 +73,7 @@ $fullName = $first_name . ' ' . $second_name;
                         <hr class="dropdown-divider" />
                     </li>
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="login.php">
+                        <a class="dropdown-item d-flex align-items-center" href="logout.php">
                             <i class="bi bi-box-arrow-right"></i>
                             <span>Sign Out</span>
                         </a>
