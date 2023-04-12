@@ -75,7 +75,7 @@
                     <div class="row gy-4">
                         <?php
 foreach ($buses as $bus) {
-    $buttonStatus = ($bus['availability'] == 1) ? '' : 'disabled';
+    $buttonReservation = ($bus['availability'] == 1) ? '<a href="make-reservation.php?id=' . $bus['bus_id'] . '&fee=' . $bus['fee'] . '&bus=' . $bus['bus_type'] . ' ' . $bus['manufacturer'] . '" type="button" class="btn btn-block btn-outline-primary btn-sm" id="btn-' . $bus['bus_id'] . '">Book Now</a>' : '';
     echo '<div class="col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="200">
                             <div class="card mb-3">
                                 <div class="card-img">
@@ -87,7 +87,7 @@ foreach ($buses as $bus) {
                                             <h5 class="card-title">' . $bus['bus_type'] . '</h5>
                                         </div>
                                         <div class="col-6">
-                                            <h5 class="card-title"><strong>$1000/Day</strong></h5>
+                                            <h5 class="card-title"><strong>$' . $bus['fee'] . '/Day</strong></h5>
                                         </div>
                                     </div>
                                     <div class="row mt-3">
@@ -135,9 +135,7 @@ foreach ($buses as $bus) {
 
     echo ($bus['availability'] == 1) ? '<i class="bi bi-circle-fill" style="color: green;"></i> Available' : '<i class="bi bi-circle-fill" style="color: red;"></i> Unavailable';
     echo '</p></div></div><div class="row mt-3">
-                            <a ' . $buttonStatus . ' href="make-reservation.php?id=' . $bus['bus_id'] . '&fee=' . $bus['fee'] . '&bus=' . $bus['bus_type'] . ' ' . $bus['manufacturer'] . '" type="button" class="btn btn-block btn-outline-primary btn-sm" id="btn-' . $bus['bus_id'] . '">
-                                Book Now
-                            </a>
+    ' . $buttonReservation . '
                         </div>
                     </div>
                 </div>
