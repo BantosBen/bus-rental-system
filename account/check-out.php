@@ -97,7 +97,7 @@
                     </ul>
                 </div>
                 <div class="col-md-8 order-md-1">
-                    <form class="needs-validation" novalidate="">
+                    <form class="needs-validation" id="payment" novalidate="">
                         <h4 class="mb-3">Payment</h4>
                         <div class="d-block my-3">
                             <div class="custom-control custom-radio">
@@ -119,13 +119,15 @@
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="cc-name">Name on card</label>
-                                <input type="text" class="form-control" id="cc-name" placeholder="" required="">
+                                <input type="text" class="form-control" id="cc-name" name="cc-name" placeholder=""
+                                    required="">
                                 <small class="text-muted">Full name as displayed on card</small>
                                 <div class="invalid-feedback"> Name on card is required </div>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="cc-number">Credit card number</label>
-                                <input type="text" class="form-control" id="cc-number" placeholder="" required="">
+                                <input type="text" class="form-control" id="cc-number" name="cc-number" placeholder=""
+                                    required="">
                                 <div class="invalid-feedback"> Credit card number is required </div>
                             </div>
                         </div>
@@ -141,6 +143,8 @@
                                 <div class="invalid-feedback"> Security code required </div>
                             </div>
                         </div>
+                        <input type="text" class="form-control" id="amount" name="fee"
+                            value="<?php echo $reservation['fee']; ?>" hidden placeholder="" required="">
                         <hr class="mb-4">
                         <button class="btn btn-primary btn-block" type="submit">Pay Now $
                             <?php echo $reservation['fee']; ?>
@@ -157,7 +161,7 @@
                             <div class="col-md-8 d-flex justify-content-center">
                                 <div class="spinner-border text-primary" role="status">
                                 </div>
-                                <p class="mt-2 mx-2">Placing your Reservation. Please wait...</p>
+                                <p class="mt-2 mx-2">Making payment transaction. Please wait...</p>
                             </div>
                         </div>
                     </div>
@@ -170,69 +174,57 @@
     <?php include 'footer.php'; ?>
 
     <script>
-        // Show the loading modal
-        function showLoadingModal() {
-            $('#loadingModal').modal('show');
-        }
+    // Show the loading modal
+    function showLoadingModal() {
+        $('#loadingModal').modal('show');
+    }
 
-        // Hide the loading modal
-        function hideLoadingModal() {
-            $('#loadingModal').modal('hide');
-        }
+    // Hide the loading modal
+    function hideLoadingModal() {
+        $('#loadingModal').modal('hide');
+    }
 
-        $(document).ready(function () {
-            $('.timepicker').timepicker();
-            $('.timepicker').timepicker({
-                minuteStep: 1,
-                showMeridian: false,
-            });
+    $(document).ready(function() {
+        $('#payment').submit(function(event) { // assuming the form has id "my-form"
+            event.preventDefault(); // prevent the form from submitting in the default way
+            placeReservation();
+        });
+    });
 
-            $('.datepicker').datepicker();
-            $('.datepicker').datepicker({
-                format: 'yyyy-mm-dd',
-                autoclose: true
-            });
+    function placeReservation() {
+        showLoadingModal();
 
-            $('#reservation-form').submit(function (event) { // assuming the form has id "my-form"
-                event.preventDefault(); // prevent the form from submitting in the default way
-                placeReservation();
-            });
+        $.ajax({
+            type: "POST",
+            url: "includes/controllers/check-out_controller.php",
+            data: $('#payment').serialize(), // serialize the form data and send it to the PHP script
+            dataType: "json",
+            success: function(response) {
+                hideLoadingModal();
+                console.log(response);
+                if (!response.error) {
+                    toastr.success(
+                        response.message
+                    );
+                    setTimeout(function() {
+                        window.location.href = 'dashboard.php';
+                    }, 1500);
+                } else {
+                    console.log("ERROR: " + response.message);
+                    toastr.error(
+                        response.message
+                    );
+                }
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                hideLoadingModal();
+                console.error('Error submitting data:', errorThrown);
+                console.log('Response text:', xhr.responseText);
+                toastr.error('Error! Failed to scan product');
+            }
         });
 
-        function placeReservation() {
-            showLoadingModal();
-
-            $.ajax({
-                type: "POST",
-                url: "includes/controllers/make-reservation_controller.php",
-                data: $('#reservation-form').serialize(), // serialize the form data and send it to the PHP script
-                dataType: "json",
-                success: function (response) {
-                    hideLoadingModal();
-                    console.log(response);
-                    if (!response.error) {
-                        toastr.success(
-                            response.message
-                        );
-                        setTimeout(function () {
-                            window.location.href = 'dashboard.php';
-                        }, 500);
-                    } else {
-                        console.log("ERROR: " + response.message);
-                        toastr.error(
-                            response.message
-                        );
-                    }
-                },
-                error: function (xhr, textStatus, errorThrown) {
-                    hideLoadingModal();
-                    console.error('Error submitting data:', errorThrown);
-                    console.log('Response text:', xhr.responseText);
-                    toastr.error('Error! Failed to scan product');
-                }
-            });
-
-        }
+    }
     </script>
 </body>
 

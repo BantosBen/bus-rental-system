@@ -3,3 +3,7 @@ In reservation status:
 1 - active
 2 - unpaid
 3 - cancelled
+
+Bus availability status:
+1 - Available
+2 - Unavailable

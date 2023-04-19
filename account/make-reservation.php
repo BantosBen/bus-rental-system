@@ -210,7 +210,7 @@
                         response.message
                     );
                     setTimeout(function() {
-                        window.location.href = 'check-out.php?id='+response.reservation_id;
+                        window.location.href = `check-out.php?id=${response.reservation_id}`;
                     }, 1500);
                 } else {
                     console.log("ERROR: " + response.message);
