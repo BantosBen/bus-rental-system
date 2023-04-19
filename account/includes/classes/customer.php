@@ -81,4 +81,46 @@ class Customer
         return json_decode(json_encode($message));
 
     }
+
+    public function updatePassword($password, $newPassword){
+        $message = [];
+
+        if ($this->isPasswordValid($password)) {
+            $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+            $userId = $_SESSION['id'];
+
+            $sql = "UPDATE `customer` SET `customer_password`='$hashedPassword' WHERE `customer_id`='$userId'";
+            $result = $this->connection->query($sql);
+
+            if ($result > 0) {
+                $message['error'] = false;
+                $message['message'] = "Password update was successful";
+
+            } else {
+                $message['error'] = true;
+                $message['message'] = "Something happened. update failed. Check and try again.";
+
+            }
+        }else{
+            $message['error'] = true;
+            $message['message'] = "Incorrect password";
+        }
+
+        return json_encode($message);
+    }
+
+    private function isPasswordValid($password){
+        $userId = $_SESSION['id'];
+        $sql_raw = "SELECT * FROM `customer` WHERE `customer_id` = '$userId'";
+        $result = $this->connection->query($sql_raw);
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $user = $row;
+            }
+            return password_verify($password, $user['customer_password']);
+        }else{
+            return false;
+        }
+    }
 }

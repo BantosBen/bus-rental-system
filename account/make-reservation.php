@@ -210,8 +210,8 @@
                         response.message
                     );
                     setTimeout(function() {
-                        window.location.href = 'dashboard.php';
-                    }, 500);
+                        window.location.href = 'check-out.php?id='+response.reservation_id;
+                    }, 1500);
                 } else {
                     console.log("ERROR: " + response.message);
                     toastr.error(

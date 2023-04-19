@@ -168,7 +168,7 @@
 
                                 <div class="tab-pane fade pt-3" id="profile-change-password">
                                     <!-- Change Password Form -->
-                                    <form>
+                                    <form  class="row g-3 needs-validation" id="password-form" novalidate>
                                         <div class="row mb-3">
                                             <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">
                                                 Current Password
@@ -278,11 +278,51 @@
 
     }
 
+
+    function updatePassword() {
+        showLoadingModal();
+
+        $.ajax({
+            type: "POST",
+            url: "includes/controllers/profile_controller.php",
+            data: $('#password-form').serialize(), // serialize the form data and send it to the PHP script
+            dataType: "json",
+            success: function(response) {
+                hideLoadingModal();
+                console.log(response);
+                if (!response.error) {
+                    toastr.success(
+                        response.message
+                    );
+                    setTimeout(function() {
+                        window.location.href = 'logout.php';
+                    }, 500);
+                } else {
+                    console.log("ERROR: " + response.message);
+                    toastr.error(
+                        response.message
+                    );
+                }
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                hideLoadingModal();
+                console.error('Error submitting data:', errorThrown);
+                console.log('Response text:', xhr.responseText);
+                toastr.error('Error! Something went wrong kindly try again later');
+            }
+        });
+
+    }
+
     $(document).ready(function() {
         $('#auth-form').submit(function(event) { // assuming the form has id "my-form"
             event.preventDefault(); // prevent the form from submitting in the default way
-            //toastr.info('Scanning item order...');
             updateProfile();
+        });
+
+        $('#password-form').submit(function(event) { // assuming the form has id "my-form"
+            event.preventDefault(); // prevent the form from submitting in the default way
+            updatePassword();
         });
     });
     </script>
