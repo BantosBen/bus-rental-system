@@ -135,4 +135,72 @@ class Reservation
             return null;
         }
     }
+
+    public function changeReservationStatus($id, $status)
+    {
+        $sql = "UPDATE `reservation` SET `status`=$status WHERE `reservation_id`='$id'";
+        $response = $this->connection->query($sql);
+
+        return $response > 0;
+    }
+
+    public function addCustomerReview($reservationID, $busID, $reviewMessage, $ratings)
+    {
+        $message = [];
+        if ($this->changeReservationStatus($reservationID, 0)) {
+            $bus = new Bus;
+            $bus->updateAvailability($busID, 1);
+
+            $userID = $_SESSION['id'];
+            $sql = "INSERT INTO `customer_review`(`customer_id`, `bus_id`, `rating`, `review_text`) VALUES ($userID,$busID,$ratings,'$reviewMessage')";
+            $this->connection->query($sql);
+
+            $message['error'] = false;
+            $message['message'] = "Review submitted. Thank you for your feedback.";
+        } else {
+            $message['error'] = true;
+            $message['message'] = "Failed!! Something went wrong. Kindly try again later.";
+        }
+
+        return json_encode($message);
+    }
+
+    public function completeReservation($reservationID, $busID)
+    {
+        $message = [];
+        if ($this->changeReservationStatus($reservationID, 0)) {
+            $bus = new Bus;
+            $bus->updateAvailability($busID, 1);
+
+            $message['error'] = false;
+            $message['message'] = "Reservation Completed. Thank you for using our services";
+        } else {
+            $message['error'] = true;
+            $message['message'] = "Failed!! Something went wrong. Kindly try again later.";
+        }
+
+        return json_encode($message);
+    }
+
+
+    public function cancelReservation($reservationID, $busID)
+    {
+        $message = [];
+        if ($this->changeReservationStatus($reservationID, 3)) {
+            $bus = new Bus;
+            $bus->updateAvailability($busID, 1);
+
+            $message['error'] = false;
+            $message['message'] = "Reservation Cancelled. We're sad you're terminating your reservation.";
+        } else {
+            $message['error'] = true;
+            $message['message'] = "Failed!! Something went wrong. Kindly try again later.";
+        }
+
+        return json_encode($message);
+    }
+
+
+
+
 }

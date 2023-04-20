@@ -158,98 +158,98 @@
                             </h5>
                             <?php if ($reservation != null) {
                                 $bus = $reservation['bus']; ?>
+                            <div class="row">
                                 <div class="row">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <h5><strong>Bus Details</strong></h5>
-                                            <hr class="dropdown-divider" />
-                                            <div class="row mt-3">
-                                                <div class="col-6">
-                                                    <p class="card-text">
-                                                        <i class="bi bi-bus"></i>
-                                                        <span><b>Manufacturer:</b></span>
-                                                        <?php echo $bus['manufacturer']; ?>
-                                                    </p>
-                                                </div>
-                                                <div class="col-6">
-                                                    <p class="card-text">
-                                                        <i class="bi bi-cog"></i>
-                                                        <span><b>Model:</b></span>
-                                                        <?php echo $bus['model']; ?>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div class="row mt-sm-1">
-                                                <div class="col-6">
-                                                    <p class="card-text">
-                                                        <i class="bi bi-car"></i>
-                                                        <span><b>Plate Number:</b></span>
-                                                        <?php echo $bus['licenseplate_number']; ?>
-                                                    </p>
-                                                </div>
-                                                <div class="col-6">
-                                                    <p class="card-text">
-                                                        <i class="bi bi-chair"></i>
-                                                        <span><b>Capacity:</b></span>
-                                                        <?php echo $bus['seating_capacity']; ?>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row mt-sm-1">
-                                        <div class="col-12">
-                                            <h5><strong>Reservation Details</strong></h5>
-                                            <hr class="dropdown-divider" />
-                                            <div class="row mt-2">
-                                                <div class="col-6">
-                                                    <p>
-                                                        <span><b>Departure:</b></span>
-                                                        <?php echo $reservation['departure_date'] . ' | ' . $reservation['departure_time']; ?>
-                                                    </p>
-                                                </div>
-                                                <div class="col-6">
-                                                    <p>
-                                                        <span><b>Arrival:</b></span>
-                                                        <br />
-                                                        <?php echo $reservation['arrival_date'] . ' | ' . $reservation['arrival_time']; ?>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <p>
-                                                    <span><b>Route:</b></span>
-                                                    <?php echo $reservation['departure_location'] . ' - ' . $reservation['arrival_location']; ?>
+                                    <div class="col-12">
+                                        <h5><strong>Bus Details</strong></h5>
+                                        <hr class="dropdown-divider" />
+                                        <div class="row mt-3">
+                                            <div class="col-6">
+                                                <p class="card-text">
+                                                    <i class="bi bi-bus"></i>
+                                                    <span><b>Manufacturer:</b></span>
+                                                    <?php echo $bus['manufacturer']; ?>
                                                 </p>
                                             </div>
-                                            <div class="row">
-                                                <p>
-                                                    <span><b>Amount:</b></span>
-                                                    <?php echo $reservation['payment_total']; ?>
+                                            <div class="col-6">
+                                                <p class="card-text">
+                                                    <i class="bi bi-cog"></i>
+                                                    <span><b>Model:</b></span>
+                                                    <?php echo $bus['model']; ?>
                                                 </p>
                                             </div>
                                         </div>
-                                        <div class="col-6">
-                                            <div class="d-grid gap-2 mt-3">
-                                                <button type="button" class="btn btn-success" data-bs-toggle="modal"
-                                                    data-bs-target="#ratingModal"><i
-                                                        class="bi bi-check-circle"></i>Complete</button>
+                                        <div class="row mt-sm-1">
+                                            <div class="col-6">
+                                                <p class="card-text">
+                                                    <i class="bi bi-car"></i>
+                                                    <span><b>Plate Number:</b></span>
+                                                    <?php echo $bus['licenseplate_number']; ?>
+                                                </p>
                                             </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="d-grid gap-2 mt-3">
-                                                <button type="button" class="btn btn-danger"><i
-                                                        class="bi bi-exclamation-octagon"></i> Cancel</button>
+                                            <div class="col-6">
+                                                <p class="card-text">
+                                                    <i class="bi bi-chair"></i>
+                                                    <span><b>Capacity:</b></span>
+                                                    <?php echo $bus['seating_capacity']; ?>
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row mt-sm-1">
+                                    <div class="col-12">
+                                        <h5><strong>Reservation Details</strong></h5>
+                                        <hr class="dropdown-divider" />
+                                        <div class="row mt-2">
+                                            <div class="col-6">
+                                                <p>
+                                                    <span><b>Departure:</b></span>
+                                                    <?php echo $reservation['departure_date'] . ' | ' . $reservation['departure_time']; ?>
+                                                </p>
+                                            </div>
+                                            <div class="col-6">
+                                                <p>
+                                                    <span><b>Arrival:</b></span>
+                                                    <br />
+                                                    <?php echo $reservation['arrival_date'] . ' | ' . $reservation['arrival_time']; ?>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <p>
+                                                <span><b>Route:</b></span>
+                                                <?php echo $reservation['departure_location'] . ' - ' . $reservation['arrival_location']; ?>
+                                            </p>
+                                        </div>
+                                        <div class="row">
+                                            <p>
+                                                <span><b>Amount:</b></span>
+                                                <?php echo $reservation['payment_total']; ?>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="d-grid gap-2 mt-3">
+                                            <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                                data-bs-target="#ratingModal"><i
+                                                    class="bi bi-check-circle"></i>Complete</button>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="d-grid gap-2 mt-3">
+                                            <button type="button" class="btn btn-danger" id="cancel-reservation"><i
+                                                    class="bi bi-exclamation-octagon"></i> Cancel</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <?php } else { ?>
-                                <div class="row d-flex m-4">
-                                    <strong>
-                                        <h5>No Reservation</h5>
-                                    </strong>
-                                </div>
+                            <div class="row d-flex m-4">
+                                <strong>
+                                    <h5>No Reservation</h5>
+                                </strong>
+                            </div>
                             <?php } ?>
                         </div>
                     </div>
@@ -269,17 +269,18 @@
                         <form class="row g-3 mt-lg-3" id="rating-form">
                             <input type="hidden" name="reservation_id"
                                 value="<?php echo $reservation['reservation_id']; ?>">
+                            <input type="hidden" name="bus_id" value="<?php echo $reservation['bus_id']; ?>">
                             <div class="col-md-12">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="floatingBusName"
+                                    <input type="text" name="comment" class="form-control" id="floatingBusName"
                                         placeholder="Write a comment (Optional)">
                                     <label for="floatingBusName">Comment Review</label>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" value="5" id="floatingBusName"
-                                        placeholder="Enter your ratings max 10">
+                                    <input type="text" name="ratings" class="form-control" value="5"
+                                        id="floatingBusName" placeholder="Enter your ratings max 10">
                                     <label for="floatingBusName">Rate out of 10</label>
                                 </div>
                             </div>
@@ -290,7 +291,8 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Complete Reservation</button>
+                        <button type="button" id="complete-reservation" class="btn btn-primary">Complete
+                            Reservation</button>
                     </div>
                 </div>
             </div>
@@ -304,7 +306,7 @@
                             <div class="col-md-8 d-flex justify-content-center">
                                 <div class="spinner-border text-primary" role="status">
                                 </div>
-                                <p class="mt-2 mx-2">Placing your Reservation. Please wait...</p>
+                                <p class="mt-2 mx-2">Working on your request. Please wait...</p>
                             </div>
                         </div>
                     </div>
@@ -315,56 +317,151 @@
     <!-- End #main -->
     <?php include 'footer.php'; ?>
     <script>
-        // Show the loading modal
-        function showLoadingModal() {
-            $('#loadingModal').modal('show');
-        }
+    let activeReservationID = '<?php echo $reservation['reservation_id'] ?>';
+    let activeBusID = '<?php echo $reservation['bus_id'] ?>';
 
-        // Hide the loading modal
-        function hideLoadingModal() {
-            $('#loadingModal').modal('hide');
-        }
+    console.log(activeBusID);
+    console.log(activeReservationID);
+    // Show the loading modal
+    function showLoadingModal() {
+        $('#loadingModal').modal('show');
+    }
 
-        function submitRating() {
-            showLoadingModal();
+    // Hide the loading modal
+    function hideLoadingModal() {
+        $('#loadingModal').modal('hide');
+    }
 
-            $.ajax({
-                type: "POST",
-                url: "includes/controllers/agent_dashboard.php",
-                data: $('#rating-form').serialize(), // serialize the form data and send it to the PHP script
-                dataType: "json",
-                success: function (response) {
-                    hideLoadingModal();
-                    console.log(response);
-                    if (!response.error) {
-                        toastr.success(
-                            response.message
-                        );
-                        setTimeout(function () {
-                            window.location.href = 'dashboard.php';
-                        }, 1500);
-                    } else {
-                        toastr.error(
-                            response.message
-                        );
-                    }
-                },
-                error: function (xhr, textStatus, errorThrown) {
-                    hideLoadingModal();
-                    console.error('Error submitting data:', errorThrown);
-                    console.log('Response text:', xhr.responseText);
-                    toastr.error('Error! Failed to scan product');
+    function submitRating() {
+        showLoadingModal();
+
+        $.ajax({
+            type: "POST",
+            url: "includes/controllers/agent_dashboard.php",
+            data: $('#rating-form').serialize(), // serialize the form data and send it to the PHP script
+            dataType: "json",
+            success: function(response) {
+                hideLoadingModal();
+                console.log(response);
+                if (!response.error) {
+                    toastr.success(
+                        response.message
+                    );
+                    setTimeout(function() {
+                        window.location.href = 'dashboard.php';
+                    }, 1500);
+                } else {
+                    toastr.error(
+                        response.message
+                    );
                 }
-            });
-
-        }
-
-        $(document).ready(function () {
-            $('#rating-form').submit(function (event) { // assuming the form has id "my-form"
-                event.preventDefault(); // prevent the form from submitting in the default way
-                submitRating();
-            });
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                hideLoadingModal();
+                console.error('Error submitting data:', errorThrown);
+                console.log('Response text:', xhr.responseText);
+                toastr.error('Something went wrong');
+            }
         });
+
+    }
+
+    function completeReservation() {
+        showLoadingModal();
+
+        $.ajax({
+            type: "POST",
+            url: "includes/controllers/agent_dashboard.php",
+            data: {
+                complete: 1,
+                reservation_id: activeReservationID,
+                bus_id: activeBusID
+            }, // serialize the form data and send it to the PHP script
+            dataType: "json",
+            success: function(response) {
+                hideLoadingModal();
+                console.log(response);
+                if (!response.error) {
+                    toastr.success(
+                        response.message
+                    );
+                    setTimeout(function() {
+                        window.location.href = 'dashboard.php';
+                    }, 1500);
+                } else {
+                    toastr.error(
+                        response.message
+                    );
+                }
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                hideLoadingModal();
+                console.error('Error submitting data:', errorThrown);
+                console.log('Response text:', xhr.responseText);
+                toastr.error('Something went wrong');
+            }
+        });
+
+    }
+
+    function cancellingReservation() {
+        showLoadingModal();
+
+        $.ajax({
+            type: "POST",
+            url: "includes/controllers/agent_dashboard.php",
+            data: {
+                cancel: 1,
+                reservation_id: activeReservationID,
+                bus_id: activeBusID
+            }, // serialize the form data and send it to the PHP script
+            dataType: "json",
+            success: function(response) {
+                hideLoadingModal();
+                console.log(response);
+                if (!response.error) {
+                    toastr.success(
+                        response.message
+                    );
+                    setTimeout(function() {
+                        window.location.href = 'dashboard.php';
+                    }, 1500);
+                } else {
+                    toastr.error(
+                        response.message
+                    );
+                }
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                hideLoadingModal();
+                console.error('Error submitting data:', errorThrown);
+                console.log('Response text:', xhr.responseText);
+                toastr.error('Something went wrong');
+            }
+        });
+
+    }
+
+    $(document).ready(function() {
+        $('#rating-form').submit(function(event) { // assuming the form has id "my-form"
+            event.preventDefault(); // prevent the form from submitting in the default way
+            submitRating();
+        });
+
+        var completeButton = document.getElementById("complete-reservation");
+
+        // Add an onclick listener to the button
+        completeButton.addEventListener("click", function() {
+            completeReservation();
+        });
+
+        var cancelButton = document.getElementById("cancel-reservation");
+
+        // Add an onclick listener to the button
+        cancelButton.addEventListener("click", function() {
+            cancellingReservation();
+        });
+    });
     </script>
 </body>
 

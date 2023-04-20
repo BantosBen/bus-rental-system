@@ -102,17 +102,17 @@
                         <div class="d-block my-3">
                             <div class="custom-control custom-radio">
                                 <input id="credit" name="paymentMethod" type="radio" class="custom-control-input"
-                                    checked="" required="">
+                                    checked="" required>
                                 <label class="custom-control-label" for="credit">Credit card</label>
                             </div>
                             <div class="custom-control custom-radio">
                                 <input id="debit" name="paymentMethod" disabled type="radio"
-                                    class="custom-control-input" required="">
+                                    class="custom-control-input" required>
                                 <label class="custom-control-label" for="debit">Debit card</label>
                             </div>
                             <div class="custom-control custom-radio">
                                 <input id="paypal" name="paymentMethod" disabled type="radio"
-                                    class="custom-control-input" required="">
+                                    class="custom-control-input" required>
                                 <label class="custom-control-label" for="paypal">PayPal</label>
                             </div>
                         </div>
@@ -127,24 +127,24 @@
                             <div class="col-md-6 mb-3">
                                 <label for="cc-number">Credit card number</label>
                                 <input type="text" class="form-control" id="cc-number" name="cc-number" placeholder=""
-                                    required="">
+                                    required>
                                 <div class="invalid-feedback"> Credit card number is required </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-3 mb-3">
                                 <label for="cc-expiration">Expiration</label>
-                                <input type="text" class="form-control" id="cc-expiration" placeholder="" required="">
+                                <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
                                 <div class="invalid-feedback"> Expiration date required </div>
                             </div>
                             <div class="col-md-3 mb-3">
                                 <label for="cc-cvv">CVV</label>
-                                <input type="text" class="form-control" id="cc-cvv" placeholder="" required="">
+                                <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
                                 <div class="invalid-feedback"> Security code required </div>
                             </div>
                         </div>
                         <input type="text" class="form-control" id="amount" name="fee"
-                            value="<?php echo $reservation['fee']; ?>" hidden placeholder="" required="">
+                            value="<?php echo $reservation['fee']; ?>" hidden placeholder="" required>
                         <hr class="mb-4">
                         <button class="btn btn-primary btn-block" type="submit">Pay Now $
                             <?php echo $reservation['fee']; ?>
@@ -174,57 +174,57 @@
     <?php include 'footer.php'; ?>
 
     <script>
-    // Show the loading modal
-    function showLoadingModal() {
-        $('#loadingModal').modal('show');
-    }
+        // Show the loading modal
+        function showLoadingModal() {
+            $('#loadingModal').modal('show');
+        }
 
-    // Hide the loading modal
-    function hideLoadingModal() {
-        $('#loadingModal').modal('hide');
-    }
+        // Hide the loading modal
+        function hideLoadingModal() {
+            $('#loadingModal').modal('hide');
+        }
 
-    $(document).ready(function() {
-        $('#payment').submit(function(event) { // assuming the form has id "my-form"
-            event.preventDefault(); // prevent the form from submitting in the default way
-            placeReservation();
+        $(document).ready(function () {
+            $('#payment').submit(function (event) { // assuming the form has id "my-form"
+                event.preventDefault(); // prevent the form from submitting in the default way
+                placeReservation();
+            });
         });
-    });
 
-    function placeReservation() {
-        showLoadingModal();
+        function placeReservation() {
+            showLoadingModal();
 
-        $.ajax({
-            type: "POST",
-            url: "includes/controllers/check-out_controller.php",
-            data: $('#payment').serialize(), // serialize the form data and send it to the PHP script
-            dataType: "json",
-            success: function(response) {
-                hideLoadingModal();
-                console.log(response);
-                if (!response.error) {
-                    toastr.success(
-                        response.message
-                    );
-                    setTimeout(function() {
-                        window.location.href = 'dashboard.php';
-                    }, 1500);
-                } else {
-                    console.log("ERROR: " + response.message);
-                    toastr.error(
-                        response.message
-                    );
+            $.ajax({
+                type: "POST",
+                url: "includes/controllers/check-out_controller.php",
+                data: $('#payment').serialize(), // serialize the form data and send it to the PHP script
+                dataType: "json",
+                success: function (response) {
+                    hideLoadingModal();
+                    console.log(response);
+                    if (!response.error) {
+                        toastr.success(
+                            response.message
+                        );
+                        setTimeout(function () {
+                            window.location.href = 'dashboard.php';
+                        }, 1500);
+                    } else {
+                        console.log("ERROR: " + response.message);
+                        toastr.error(
+                            response.message
+                        );
+                    }
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    hideLoadingModal();
+                    console.error('Error submitting data:', errorThrown);
+                    console.log('Response text:', xhr.responseText);
+                    toastr.error('Error! Failed to scan product');
                 }
-            },
-            error: function(xhr, textStatus, errorThrown) {
-                hideLoadingModal();
-                console.error('Error submitting data:', errorThrown);
-                console.log('Response text:', xhr.responseText);
-                toastr.error('Error! Failed to scan product');
-            }
-        });
+            });
 
-    }
+        }
     </script>
 </body>
 

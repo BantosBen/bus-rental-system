@@ -7,7 +7,7 @@
     </div>
     <div class="credits">
         Designed by
-        <a href="https://bootstrapmade.com/">Safe Routes</a>
+        <a href="#">Safe Routes</a>
     </div>
 </footer>
 
@@ -16,21 +16,16 @@
 </a>
 
 <!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
 <!-- Datepicker JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js">
 </script>
 
-<!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-
 <!-- Timepicker JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-timepicker/0.5.2/js/bootstrap-timepicker.min.js">
 </script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.0.2/js/star-rating.min.js"></script>
 
 <!-- Vendor JS Files -->
 <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
