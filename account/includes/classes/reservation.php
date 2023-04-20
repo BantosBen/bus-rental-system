@@ -115,7 +115,24 @@ class Reservation
     {
         $userID = $_SESSION['id'];
 
-        $sql = "DELETE FROM `reservatio` WHERE `customer_id`=$userID AND status=2";
+        $sql = "DELETE FROM `reservation` WHERE `customer_id`=$userID AND status=2";
         $this->connection->query($sql);
+    }
+
+    public function getActiveReservation()
+    {
+        $userID = $_SESSION['id'];
+        $sql = "SELECT * FROM `reservation` WHERE `customer_id`=$userID AND status=1";
+        $response = $this->connection->query($sql);
+
+        if ($response->num_rows > 0) {
+            $bus = new Bus;
+            while ($row = $response->fetch_assoc()) {
+                $row['bus'] = $bus->getBus($row['bus_id']);
+                return $row;
+            }
+        } else {
+            return null;
+        }
     }
 }

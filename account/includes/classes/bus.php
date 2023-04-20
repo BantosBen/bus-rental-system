@@ -51,4 +51,18 @@ class Bus
         }
 
     }
+
+    public function getBus($busID)
+    {
+        $sql = "SELECT * FROM `bus` WHERE `bus_id`=$busID";
+        $response = $this->connection->query($sql);
+
+        if ($response->num_rows > 0) {
+            while ($row = $response->fetch_assoc()) {
+                return $row;
+            }
+        } else {
+            return null;
+        }
+    }
 }

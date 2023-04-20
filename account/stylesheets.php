@@ -27,6 +27,37 @@
 <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet" />
 <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+<link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.0.2/css/star-rating.min.css" />
 
 <!-- Template Main CSS File -->
 <link href="assets/css/style.css" rel="stylesheet" />
+
+<style>
+    .rating {
+        display: inline-block;
+    }
+
+    .rating input {
+        display: none;
+    }
+
+    .rating label {
+        cursor: pointer;
+        width: 1em;
+        height: 1em;
+        font-size: 24px;
+        color: #0000ff;
+        text-align: center;
+        margin-right: 5px;
+        line-height: 1.2;
+    }
+
+    .rating input:checked+label {
+        color: #000000;
+    }
+
+    .rating label:last-of-type {
+        margin-right: 0;
+    }
+</style>

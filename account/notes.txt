@@ -7,3 +7,7 @@ In reservation status:
 Bus availability status:
 1 - Available
 2 - Unavailable
+
+Driver availability:
+0 - Available
+1 - Unavailable

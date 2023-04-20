@@ -1,4 +1,4 @@
-<?php require_once 'includes/controllers/make-reservation_controller.php';?>
+<?php require_once 'includes/controllers/make-reservation_controller.php'; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -11,12 +11,12 @@
     <meta content="" name="description" />
     <meta content="" name="keywords" />
 
-    <?php include 'stylesheets.php';?>
+    <?php include 'stylesheets.php'; ?>
 
 </head>
 
 <body>
-    <?php include 'header.php'?>
+    <?php include 'header.php' ?>
 
     <!-- ======= Sidebar ======= -->
     <aside id="sidebar" class="sidebar">
@@ -77,6 +77,7 @@
                         <div class="card-body">
                             <form class="row g-3 mt-lg-3" id="reservation-form">
                                 <input type="hidden" name="bus_id" value="<?php echo $busID; ?>">
+                                <input type="hidden" name="fee" value="<?php echo $busFee; ?>">
                                 <div class="col-md-12">
                                     <div class="form-floating">
                                         <input type="text" class="form-control" id="floatingBusName"
@@ -86,7 +87,7 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-floating">
-                                        <input name="fee" type="text" class="form-control" id="floatingBusFee"
+                                        <input type="text" class="form-control" id="floatingBusFee"
                                             placeholder="Daily Charges" disabled value="<?php echo $busFee; ?>">
                                         <label for="floatingBusFee">Daily Charges ($)</label>
                                     </div>
@@ -162,72 +163,72 @@
     </main>
     <!-- End #main -->
 
-    <?php include 'footer.php';?>
+    <?php include 'footer.php'; ?>
 
     <script>
-    // Show the loading modal
-    function showLoadingModal() {
-        $('#loadingModal').modal('show');
-    }
+        // Show the loading modal
+        function showLoadingModal() {
+            $('#loadingModal').modal('show');
+        }
 
-    // Hide the loading modal
-    function hideLoadingModal() {
-        $('#loadingModal').modal('hide');
-    }
+        // Hide the loading modal
+        function hideLoadingModal() {
+            $('#loadingModal').modal('hide');
+        }
 
-    $(document).ready(function() {
-        $('.timepicker').timepicker();
-        $('.timepicker').timepicker({
-            minuteStep: 1,
-            showMeridian: false,
+        $(document).ready(function () {
+            $('.timepicker').timepicker();
+            $('.timepicker').timepicker({
+                minuteStep: 1,
+                showMeridian: false,
+            });
+
+            $('.datepicker').datepicker();
+            $('.datepicker').datepicker({
+                format: 'yyyy-mm-dd',
+                autoclose: true
+            });
+
+            $('#reservation-form').submit(function (event) { // assuming the form has id "my-form"
+                event.preventDefault(); // prevent the form from submitting in the default way
+                placeReservation();
+            });
         });
 
-        $('.datepicker').datepicker();
-        $('.datepicker').datepicker({
-            format: 'yyyy-mm-dd',
-            autoclose: true
-        });
+        function placeReservation() {
+            showLoadingModal();
 
-        $('#reservation-form').submit(function(event) { // assuming the form has id "my-form"
-            event.preventDefault(); // prevent the form from submitting in the default way
-            placeReservation();
-        });
-    });
-
-    function placeReservation() {
-        showLoadingModal();
-
-        $.ajax({
-            type: "POST",
-            url: "includes/controllers/make-reservation_controller.php",
-            data: $('#reservation-form').serialize(), // serialize the form data and send it to the PHP script
-            dataType: "json",
-            success: function(response) {
-                hideLoadingModal();
-                console.log(response);
-                if (!response.error) {
-                    toastr.success(
-                        response.message
-                    );
-                    setTimeout(function() {
-                        window.location.href = `check-out.php?id=${response.reservation_id}`;
-                    }, 1500);
-                } else {
-                    console.log("ERROR: " + response.message);
-                    toastr.error(
-                        response.message
-                    );
+            $.ajax({
+                type: "POST",
+                url: "includes/controllers/make-reservation_controller.php",
+                data: $('#reservation-form').serialize(), // serialize the form data and send it to the PHP script
+                dataType: "json",
+                success: function (response) {
+                    hideLoadingModal();
+                    console.log(response);
+                    if (!response.error) {
+                        toastr.success(
+                            response.message
+                        );
+                        setTimeout(function () {
+                            window.location.href = `check-out.php?id=${response.reservation_id}`;
+                        }, 1500);
+                    } else {
+                        console.log("ERROR: " + response.message);
+                        toastr.error(
+                            response.message
+                        );
+                    }
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    hideLoadingModal();
+                    console.error('Error submitting data:', errorThrown);
+                    console.log('Response text:', xhr.responseText);
+                    toastr.error('Error! Failed to scan product');
                 }
-            },
-            error: function(xhr, textStatus, errorThrown) {
-                hideLoadingModal();
-                console.error('Error submitting data:', errorThrown);
-                console.log('Response text:', xhr.responseText);
-                toastr.error('Error! Failed to scan product');
-            }
-        });
+            });
 
-    }
+        }
     </script>
 </body>
 
