@@ -65,22 +65,4 @@ class Bus
             return null;
         }
     }
-
-    public function getAvailableDrivers()
-    {
-        $sql = "SELECT * FROM `driver` WHERE `status`='active'";
-        $result = $this->connection->query($sql);
-
-        if ($result->num_rows > 0) {
-            $drivers = [];
-
-            while ($row = $result->fetch_assoc()) {
-                array_push($drivers, $row);
-            }
-
-            return $drivers;
-        } else {
-            return null;
-        }
-    }
 }

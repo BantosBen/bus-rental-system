@@ -23,16 +23,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     } else if (isset($_POST['complete'])) {
         $reservationID = $_POST['reservation_id'];
-        $busID = $_POST['bus_id'];
 
-        $respoonse = $reservation->completeReservation($reservationID, $busID);
+        $respoonse = $reservation->completeReservation($reservationID);
         echo $response;
 
     } else if (isset($_POST['cancel'])) {
         $reservationID = $_POST['reservation_id'];
-        $busID = $_POST['bus_id'];
 
-        $respoonse = $reservation->cancelReservation($reservationID, $busID);
+        $respoonse = $reservation->cancelReservation($reservationID);
         echo $response;
     }
 } else {

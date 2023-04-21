@@ -2,6 +2,7 @@
 
 require_once 'database.php';
 require_once 'bus.php';
+require_once 'driver.php';
 
 class Reservation
 {
@@ -18,8 +19,8 @@ class Reservation
         if (!$this->hasActiveReservation($reservation['user_id'])) {
             $this->clearUnpaidReservations();
             $message = [];
-            $sql = "INSERT INTO `reservation`(`customer_id`, `bus_id`, `departure_date`, `departure_time`, `arrival_date`, `arrival_time`, `departure_location`, `arrival_location`, `payment_total`)
-        VALUES ('" . $reservation['user_id'] . "','" . $reservation['bus_id'] . "','" . $reservation['dept_date'] . "','" . $reservation['dept_time'] . "','" . $reservation['arr_date'] . "','" . $reservation['arr_time'] . "','" . $reservation['dept_location'] . "','" . $reservation['arr_location'] . "','" . $reservation['fee'] . "')";
+            $sql = "INSERT INTO `reservation`(`customer_id`, `bus_id`, `departure_date`, `departure_time`, `arrival_date`, `arrival_time`, `departure_location`, `arrival_location`, `payment_total`, `driver_id`)
+        VALUES ('" . $reservation['user_id'] . "','" . $reservation['bus_id'] . "','" . $reservation['dept_date'] . "','" . $reservation['dept_time'] . "','" . $reservation['arr_date'] . "','" . $reservation['arr_time'] . "','" . $reservation['dept_location'] . "','" . $reservation['arr_location'] . "','" . $reservation['fee'] . "','" . $reservation['driver'] . "')";
             $result = $this->connection->query($sql);
             // Get the reservation ID of the last inserted row
             $reservation_id = $this->connection->insert_id;
@@ -28,6 +29,9 @@ class Reservation
             if ($result > 0) {
                 $bus = new Bus;
                 $bus->updateAvailability($reservation['bus_id'], 2);
+                $driver = new Driver;
+                $driver->updateAVailability($reservation['driver'], "unavailable");
+
                 $message['error'] = false;
                 $message['message'] = "Reservation Made Successfully";
                 $message['reservation_id'] = $reservation_id;
@@ -55,7 +59,6 @@ class Reservation
         while ($row = $results->fetch_assoc()) {
             array_push($reservations, $row);
         }
-
         return $reservations;
     }
 
@@ -147,9 +150,10 @@ class Reservation
     public function addCustomerReview($reservationID, $busID, $reviewMessage, $ratings)
     {
         $message = [];
+
         if ($this->changeReservationStatus($reservationID, 0)) {
-            $bus = new Bus;
-            $bus->updateAvailability($busID, 1);
+
+            $this->releaseResources($reservationID);
 
             $userID = $_SESSION['id'];
             $sql = "INSERT INTO `customer_review`(`customer_id`, `bus_id`, `rating`, `review_text`) VALUES ($userID,$busID,$ratings,'$reviewMessage')";
@@ -165,12 +169,13 @@ class Reservation
         return json_encode($message);
     }
 
-    public function completeReservation($reservationID, $busID)
+    public function completeReservation($reservationID)
     {
         $message = [];
+
         if ($this->changeReservationStatus($reservationID, 0)) {
-            $bus = new Bus;
-            $bus->updateAvailability($busID, 1);
+
+            $this->releaseResources($reservationID);
 
             $message['error'] = false;
             $message['message'] = "Reservation Completed. Thank you for using our services";
@@ -183,12 +188,12 @@ class Reservation
     }
 
 
-    public function cancelReservation($reservationID, $busID)
+    public function cancelReservation($reservationID)
     {
         $message = [];
         if ($this->changeReservationStatus($reservationID, 3)) {
-            $bus = new Bus;
-            $bus->updateAvailability($busID, 1);
+
+            $this->releaseResources($reservationID);
 
             $message['error'] = false;
             $message['message'] = "Reservation Cancelled. We're sad you're terminating your reservation.";
@@ -200,7 +205,30 @@ class Reservation
         return json_encode($message);
     }
 
+    private function getReservationByID($reservationID)
+    {
+        $sql = "SELECT * FROM `reservation` WHERE `reservation_id`=$reservationID";
+        $result = $this->connection->query($sql);
 
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                return $row;
+            }
+        } else {
+            return null;
+        }
+    }
+
+    private function releaseResources($reservationID)
+    {
+        $reservation = $this->getReservationByID($reservationID);
+
+        $bus = new Bus;
+        $bus->updateAvailability($reservation['bus_id'], 1);
+
+        $driver = new Driver;
+        $driver->updateAVailability($reservation['driver_id'], "available");
+    }
 
 
 }
