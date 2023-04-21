@@ -79,4 +79,25 @@ LIMIT 6;
 
         return $results->num_rows;
     }
+
+    public function delete($busID)
+    {
+        $sql = "DELETE FROM `bus` WHERE `bus_id`=$busID";
+        $result = $this->connection->query($sql);
+    }
+
+    public function update($bus)
+    {
+        $sql = "UPDATE `bus` SET 
+        `bus_type`='" . $bus['bus_type'] . "', 
+        `manufacturer`='" . $bus['manufacturer'] . "', 
+        `model`='" . $bus['model'] . "', 
+        `year`='" . $bus['year'] . "', 
+        `seating_capacity`='" . $bus['seating_capacity'] . "', 
+        `licenseplate_number`='" . $bus['licenseplate_number'] . "', 
+        `fee`='" . $bus['fee'] . "' WHERE `bus_id`='" . $bus['id'] . "'";
+
+        $result = $this->connection->query($sql);
+    }
+
 }
