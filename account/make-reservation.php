@@ -94,6 +94,22 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-floating">
+                                        <select class="form-select" id="floatingSelect" name="driver"
+                                            aria-label="State">
+                                            <?php
+
+                                            if ($drivers != null) {
+                                                foreach ($drivers as $driver) {
+                                                    echo '<option value="' . $driver['driver_id'] . '">' . $driver['first_name'] . ' ' . $driver['last_name'] . '</option>';
+                                                }
+                                            }
+                                            ?>
+                                        </select>
+                                        <label for="floatingSelect">Driver</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-floating">
                                         <input type="text" id="floatingDeptDate" class="form-control datepicker"
                                             data-provide="datepicker" name="dept_date">
                                         <label for="floatingDeptDate">Departure Date</label>

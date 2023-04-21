@@ -30,7 +30,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         'arr_time' => $arrTime,
         'dept_location' => $_POST['dept_location'],
         'arr_location' => $_POST['arr_location'],
-        'fee' => $_POST['fee']);
+        'fee' => $_POST['fee']
+    );
 
     $reservation = new Reservation;
     $response = $reservation->makeReservation($reservation_data);
@@ -40,9 +41,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 } else {
 
     if (isset($_GET['id']) && isset($_GET['bus']) && isset($_GET['fee'])) {
+        require_once('includes/classes/bus.php');
+
         $busID = $_GET['id'];
         $busName = $_GET['bus'];
         $busFee = $_GET['fee'];
+
+        $busObj = new Bus;
+
+        $drivers = $busObj->getAvailableDrivers();
+
     } else {
         header('Location: dashboard.php');
     }
