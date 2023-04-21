@@ -82,7 +82,8 @@ class Customer
 
     }
 
-    public function updatePassword($password, $newPassword){
+    public function updatePassword($password, $newPassword)
+    {
         $message = [];
 
         if ($this->isPasswordValid($password)) {
@@ -101,7 +102,7 @@ class Customer
                 $message['message'] = "Something happened. update failed. Check and try again.";
 
             }
-        }else{
+        } else {
             $message['error'] = true;
             $message['message'] = "Incorrect password";
         }
@@ -109,7 +110,8 @@ class Customer
         return json_encode($message);
     }
 
-    private function isPasswordValid($password){
+    private function isPasswordValid($password)
+    {
         $userId = $_SESSION['id'];
         $sql_raw = "SELECT * FROM `customer` WHERE `customer_id` = '$userId'";
         $result = $this->connection->query($sql_raw);
@@ -119,8 +121,16 @@ class Customer
                 $user = $row;
             }
             return password_verify($password, $user['customer_password']);
-        }else{
+        } else {
             return false;
         }
+    }
+
+    public function getCount()
+    {
+        $sql = "SELECT * FROM `customer`";
+        $results = $this->connection->query($sql);
+
+        return $results->num_rows;
     }
 }

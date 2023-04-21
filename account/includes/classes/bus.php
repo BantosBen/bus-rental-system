@@ -37,7 +37,13 @@ class Bus
 
     public function getTopBuses()
     {
-        $sql = "SELECT * FROM `bus` ORDER BY RAND() LIMIT 3;";
+        $sql = "SELECT bus.*, AVG(customer_review.rating) AS avg_rating
+FROM bus
+LEFT JOIN customer_review ON bus.bus_id = customer_review.bus_id
+GROUP BY bus.bus_id
+ORDER BY avg_rating DESC
+LIMIT 6;
+";
         $result = $this->connection->query($sql);
 
         $buses = [];
@@ -64,5 +70,13 @@ class Bus
         } else {
             return null;
         }
+    }
+
+    public function getCount()
+    {
+        $sql = "SELECT * FROM `bus`";
+        $results = $this->connection->query($sql);
+
+        return $results->num_rows;
     }
 }

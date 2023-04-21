@@ -37,4 +37,12 @@ class Driver
             return null;
         }
     }
+
+    public function getCount()
+    {
+        $sql = "SELECT * FROM `driver`";
+        $results = $this->connection->query($sql);
+
+        return $results->num_rows;
+    }
 }

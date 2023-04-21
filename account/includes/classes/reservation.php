@@ -230,5 +230,21 @@ class Reservation
         $driver->updateAVailability($reservation['driver_id'], "available");
     }
 
+    public function getActiveReservations()
+    {
+        $sql = "SELECT `reservation`.*, `bus`.`manufacturer`, `bus`.`bus_type` 
+        FROM `reservation` 
+        JOIN `bus` ON `reservation`.`bus_id` = `bus`.`bus_id` WHERE `reservation`.`status`=1";
+        $results = $this->connection->query($sql);
 
+        $reservations = [];
+        if ($results->num_rows > 0) {
+            while ($row = $results->fetch_assoc()) {
+                array_push($reservations, $row);
+            }
+            return $reservations;
+        } else {
+            return null;
+        }
+    }
 }

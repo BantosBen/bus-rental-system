@@ -153,7 +153,11 @@ class Auth
 
     private function createSession($id, $isCustomer)
     {
-        $_SESSION['id'] = $id;
-        $_SESSION['isCustomer'] = $isCustomer;
+        if ($isCustomer) {
+            $_SESSION['id'] = $id;
+        } else {
+            $_SESSION['admin'] = $id;
+        }
+
     }
 }
