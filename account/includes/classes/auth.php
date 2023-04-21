@@ -158,6 +158,5 @@ class Auth
         } else {
             $_SESSION['admin'] = $id;
         }
-
     }
 }

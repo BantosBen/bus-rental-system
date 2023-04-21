@@ -25,6 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $user['city'] = $_POST['city'];
         $user['state'] = $_POST['state'];
         $user['zip'] = $_POST['zip'];
+        $user['id'] = $_SESSION['id'];
 
         $response = $customer->updateCustomer($user);
 

@@ -1,5 +1,11 @@
 <?php
 
+session_start();
+
+if (!isset($_SESSION['admin'])) {
+    header('Location: ../login.php');
+}
+
 require_once('../includes/classes/customer.php');
 require_once('../includes/classes/bus.php');
 require_once('../includes/classes/driver.php');
@@ -16,7 +22,7 @@ $numberOfDrivers = $driver->getCount();
 
 
 $reservation = new Reservation;
-$activeReservations = $reservation->getActiveReservation();
+$activeReservations = $reservation->getActiveReservations();
 if ($activeReservations != null) {
     $numberOfActiveReservatio = count($activeReservation);
 } else {

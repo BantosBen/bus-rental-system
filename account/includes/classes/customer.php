@@ -42,6 +42,7 @@ class Customer
     {
         $message = [];
 
+        $id = $user['id'];
         $firstName = $user['first_name'];
         $lastName = $user['last_name'];
         $emailAddress = $user['email'];
@@ -60,7 +61,7 @@ class Customer
             `phone_number`='$phoneNumber',
             `city`='$city',
             `state`='$state',
-            `zip_code`='$zipCode' WHERE `customer_id` = '$this->customerID'";
+            `zip_code`='$zipCode' WHERE `customer_id` = '$id'";
 
             $result = $this->connection->query($sql);
 
@@ -132,5 +133,41 @@ class Customer
         $results = $this->connection->query($sql);
 
         return $results->num_rows;
+    }
+
+
+    public function getAll()
+    {
+        $sql = "SELECT * FROM `customer`";
+        $results = $this->connection->query($sql);
+
+        if ($results->num_rows > 0) {
+            $customers = [];
+            while ($row = $results->fetch_assoc()) {
+                array_push($customers, $row);
+            }
+
+            return $customers;
+        } else {
+            return null;
+        }
+    }
+
+
+    public function deleteCustomer($customerID)
+    {
+        $sql = "DELETE FROM `customer` WHERE `customer_id`='$customerID'";
+        $response = $this->connection->query($sql);
+
+        if ($response > 0) {
+            $message['error'] = false;
+            $message['message'] = "Customer deleted successful";
+
+        } else {
+            $message['error'] = true;
+            $message['message'] = "Something happened. update failed. Check and try again.";
+        }
+
+        return json_encode($message);
     }
 }
