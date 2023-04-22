@@ -273,4 +273,23 @@ class Reservation
         $sql = "UPDATE `reservation` SET `status`=3 WHERE `reservation_id` = $reservationID";
         $this->connection->query($sql);
     }
+
+    public function getAllReviews()
+    {
+        $sql = "SELECT `customer_review`.*, `bus`.`bus_type`, `bus`.`manufacturer` 
+        FROM `customer_review`
+        JOIN `bus` ON `customer_review`.`bus_id` = `bus`.`bus_id`";
+
+        $result = $this->connection->query($sql);
+
+        if ($result->num_rows > 0) {
+            $reviews = [];
+            while ($row = $result->fetch_assoc()) {
+                array_push($reviews, $row);
+            }
+            return $reviews;
+        } else {
+            return null;
+        }
+    }
 }
