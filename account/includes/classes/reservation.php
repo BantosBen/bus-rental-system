@@ -247,4 +247,30 @@ class Reservation
             return null;
         }
     }
+
+    public function getAll()
+    {
+        $sql = "SELECT `reservation`.*, `bus`.`bus_type`, `customer`.`first_name`, `customer`.`last_name`, `customer`.`phone_number` 
+        FROM `reservation`
+        JOIN `bus` ON `reservation`.`bus_id` = `bus`.`bus_id`
+        JOIN `customer` ON `reservation`.`customer_id` = `customer`.`customer_id`";
+
+        $result = $this->connection->query($sql);
+
+        if ($result->num_rows > 0) {
+            $reservations = [];
+            while ($row = $result->fetch_assoc()) {
+                array_push($reservations, $row);
+            }
+            return $reservations;
+        } else {
+            return null;
+        }
+    }
+
+    public function cancel($reservationID)
+    {
+        $sql = "UPDATE `reservation` SET `status`=3 WHERE `reservation_id` = $reservationID";
+        $this->connection->query($sql);
+    }
 }
