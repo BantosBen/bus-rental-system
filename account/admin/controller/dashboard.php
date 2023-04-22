@@ -24,7 +24,7 @@ $numberOfDrivers = $driver->getCount();
 $reservation = new Reservation;
 $activeReservations = $reservation->getActiveReservations();
 if ($activeReservations != null) {
-    $numberOfActiveReservatio = count($activeReservation);
+    $numberOfActiveReservatio = count($activeReservations);
 } else {
     $numberOfActiveReservatio = 0;
 }

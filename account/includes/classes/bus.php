@@ -95,9 +95,22 @@ LIMIT 6;
         `year`='" . $bus['year'] . "', 
         `seating_capacity`='" . $bus['seating_capacity'] . "', 
         `licenseplate_number`='" . $bus['licenseplate_number'] . "', 
-        `fee`='" . $bus['fee'] . "' WHERE `bus_id`='" . $bus['id'] . "'";
+        `fee`='" . $bus['fee'] . "'";
+
+        if (!empty($bus['image'])) {
+            $sql .= ", `image`='" . $bus['image'] . "'";
+        }
+
+        $sql .= " WHERE `bus_id`='" . $bus['id'] . "'";
 
         $result = $this->connection->query($sql);
+    }
+
+    public function insert($bus)
+    {
+        $sql = "INSERT INTO `bus`(`bus_type`, `manufacturer`, `model`, `year`, `seating_capacity`, `licenseplate_number`, `fee`, `image`) 
+        VALUES ('{$bus['bus_type']}', '{$bus['manufacturer']}', '{$bus['model']}', '{$bus['year']}', '{$bus['seating_capacity']}', '{$bus['licenseplate_number']}', '{$bus['fee']}', '{$bus['image']}')";
+        $this->connection->query($sql);
     }
 
 }

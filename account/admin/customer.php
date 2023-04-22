@@ -164,42 +164,42 @@
                                     </thead>
                                     <tbody>
                                         <?php foreach ($customers as $client) { ?>
-                                        <tr>
-                                            <td>
-                                                <?php echo $client['first_name'] . ' ' . $client['last_name'] ?>
-                                            </td>
-                                            <td>
-                                                <?php echo $client['email_address'] ?>
-                                            </td>
-                                            <td>
-                                                <?php echo $client['phone_number'] ?>
-                                            </td>
-                                            <td>
-                                                <?php echo $client['customer_address'] ?>
-                                            </td>
-                                            <td>
-                                                <div class="row">
-                                                    <div class="col-6">
-                                                        <button type="button"
-                                                            class="btn btn-block btn-outline-primary btn-sm"
-                                                            data-toggle="modal"
-                                                            data-target="#modal-edit-<?php echo $client['customer_id'] ?>">
-                                                            <i class="fa fa-edit"></i>
-                                                            Edit
-                                                        </button>
+                                            <tr>
+                                                <td>
+                                                    <?php echo $client['first_name'] . ' ' . $client['last_name'] ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $client['email_address'] ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $client['phone_number'] ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $client['customer_address'] ?>
+                                                </td>
+                                                <td>
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <button type="button"
+                                                                class="btn btn-block btn-outline-primary btn-sm"
+                                                                data-toggle="modal"
+                                                                data-target="#modal-edit-<?php echo $client['customer_id'] ?>">
+                                                                <i class="fa fa-edit"></i>
+                                                                Edit
+                                                            </button>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <button type="button"
+                                                                class="btn btn-block btn-outline-danger btn-sm"
+                                                                data-toggle="modal"
+                                                                data-target="#modal-delete-<?php echo $client['customer_id'] ?>">
+                                                                <i class="fa fa-trash"></i>
+                                                                Delete
+                                                            </button>
+                                                        </div>
                                                     </div>
-                                                    <div class="col-6">
-                                                        <button type="button"
-                                                            class="btn btn-block btn-outline-danger btn-sm"
-                                                            data-toggle="modal"
-                                                            data-target="#modal-delete-<?php echo $client['customer_id'] ?>">
-                                                            <i class="fa fa-trash"></i>
-                                                            Delete
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                                </td>
+                                            </tr>
                                         <?php } ?>
                                     </tbody>
                                     <tfoot>
@@ -222,124 +222,124 @@
             <!-- /.container-fluid -->
         </section>
         <?php foreach ($customers as $client) { ?>
-        <div class="modal fade" id="modal-edit-<?php echo $client['customer_id'] ?>">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Edit Customer Details</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+            <div class="modal fade" id="modal-edit-<?php echo $client['customer_id'] ?>">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Edit Customer Details</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form method="post" action="">
+                            <div class="modal-body row">
+                                <input value="<?php echo $client['customer_id'] ?>" required type="hidden" name="edit_id"
+                                    class="form-control" id="edit_id">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="first-name">First Name</label>
+                                        <input value="<?php echo $client['first_name'] ?>" required type="text"
+                                            name="first-name" class="form-control" id="first-name"
+                                            placeholder="Enter First Name">
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="second-name">Second Name</label>
+                                        <input value="<?php echo $client['last_name'] ?>" required type="text"
+                                            name="second-name" class="form-control" id="second-name"
+                                            placeholder="Enter Second Name">
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="email">Email</label>
+                                        <input value="<?php echo $client['email_address'] ?>" required type="email"
+                                            name="email" class="form-control" id="email" placeholder="Enter Email">
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="address">Address</label>
+                                        <input value="<?php echo $client['customer_address'] ?>" required type="text"
+                                            name="address" class="form-control" id="address" placeholder="Enter Address">
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="phone">Phone Number</label>
+                                        <input value="<?php echo $client['phone_number'] ?>" required type="number"
+                                            name="phone" class="form-control" id="phone" placeholder="Enter Phone Number">
+                                    </div>
+                                </div>
+
+                                <div class="col-5">
+                                    <div class="form-group">
+                                        <label for="city">City</label>
+                                        <input value="<?php echo $client['city'] ?>" required type="text" name="city"
+                                            class="form-control" id="city" placeholder="Enter City">
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="state">State</label>
+                                        <input value="<?php echo $client['state'] ?>" required type="text" name="state"
+                                            class="form-control" id="state" placeholder="Enter State">
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <label for="zip">Zip Code</label>
+                                        <input value="<?php echo $client['zip_code'] ?>" required type="text" name="zip"
+                                            class="form-control" id="zip" placeholder="Enter Zip Code">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
+                            <div class="modal-footer justify-content-between">
+                                <button type="submit" class="btn btn-secondary">Save Changes</button>
+                            </div>
+                        </form>
                     </div>
-                    <form method="post" action="">
-                        <div class="modal-body row">
-                            <input value="<?php echo $client['customer_id'] ?>" required type="hidden" name="edit_id"
-                                class="form-control" id="edit_id">
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label for="first-name">First Name</label>
-                                    <input value="<?php echo $client['first_name'] ?>" required type="text"
-                                        name="first-name" class="form-control" id="first-name"
-                                        placeholder="Enter First Name">
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label for="second-name">Second Name</label>
-                                    <input value="<?php echo $client['last_name'] ?>" required type="text"
-                                        name="second-name" class="form-control" id="second-name"
-                                        placeholder="Enter Second Name">
-                                </div>
-                            </div>
-
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label for="email">Email</label>
-                                    <input value="<?php echo $client['email_address'] ?>" required type="email"
-                                        name="email" class="form-control" id="email" placeholder="Enter Email">
-                                </div>
-                            </div>
-
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label for="address">Address</label>
-                                    <input value="<?php echo $client['customer_address'] ?>" required type="text"
-                                        name="address" class="form-control" id="address" placeholder="Enter Address">
-                                </div>
-                            </div>
-
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label for="phone">Phone Number</label>
-                                    <input value="<?php echo $client['phone_number'] ?>" required type="number"
-                                        name="phone" class="form-control" id="phone" placeholder="Enter Phone Number">
-                                </div>
-                            </div>
-
-                            <div class="col-5">
-                                <div class="form-group">
-                                    <label for="city">City</label>
-                                    <input value="<?php echo $client['city'] ?>" required type="text" name="city"
-                                        class="form-control" id="city" placeholder="Enter City">
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <label for="state">State</label>
-                                    <input value="<?php echo $client['state'] ?>" required type="text" name="state"
-                                        class="form-control" id="state" placeholder="Enter State">
-                                </div>
-                            </div>
-                            <div class="col-3">
-                                <div class="form-group">
-                                    <label for="zip">Zip Code</label>
-                                    <input value="<?php echo $client['zip_code'] ?>" required type="text" name="zip"
-                                        class="form-control" id="zip" placeholder="Enter Zip Code">
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /.card-body -->
-                        <div class="modal-footer justify-content-between">
-                            <button type="submit" class="btn btn-secondary">Save Changes</button>
-                        </div>
-                    </form>
+                    <!-- /.modal-content -->
                 </div>
-                <!-- /.modal-content -->
+                <!-- /.modal-dialog -->
             </div>
-            <!-- /.modal-dialog -->
-        </div>
 
 
-        <div class="modal fade" id="modal-delete-<?php echo $client['customer_id']; ?>">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Delete Customer</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+            <div class="modal fade" id="modal-delete-<?php echo $client['customer_id']; ?>">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Delete Customer</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form method="post" action="">
+                            <div class="modal-body row">
+                                <div class="col-12">
+                                    <p>Do you wish to delete
+                                        <b>
+                                            <?php echo $client['first_name'] . ' ' . $client['last_name']; ?>
+                                        </b>
+                                    </p>
+                                </div>
+                                <input value="<?php echo $client['customer_id'] ?>" required type="hidden" name="delete_id"
+                                    class="form-control" id="delete_id">
+                            </div>
+                            <div class="modal-footer justify-content-between">
+                                <button type="submit" class="btn btn-danger">Delete Customer</button>
+                            </div>
+                        </form>
                     </div>
-                    <form method="post" action="">
-                        <div class="modal-body row">
-                            <div class="col-12">
-                                <p>Do you wish to delete
-                                    <b>
-                                        <?php echo $client['first_name'] . ' ' . $client['last_name']; ?>
-                                    </b>
-                                </p>
-                            </div>
-                            <input value="<?php echo $client['customer_id'] ?>" required type="hidden" name="delete_id"
-                                class="form-control" id="delete_id">
-                        </div>
-                        <div class="modal-footer justify-content-between">
-                            <button type="submit" class="btn btn-danger">Delete Customer</button>
-                        </div>
-                    </form>
+                    <!-- /.modal-content -->
                 </div>
-                <!-- /.modal-content -->
+                <!-- /.modal-dialog -->
             </div>
-            <!-- /.modal-dialog -->
-        </div>
 
         <?php } ?>
         <!-- /.content -->
@@ -364,37 +364,37 @@
     <?php include 'footer.php'; ?>
     <!-- Page specific script -->
     <script>
-    // Show the loading modal
-    function showLoadingModal() {
-        $('#loadingModal').modal('show');
-    }
+        // Show the loading modal
+        function showLoadingModal() {
+            $('#loadingModal').modal('show');
+        }
 
-    // Hide the loading modal
-    function hideLoadingModal() {
-        $('#loadingModal').modal('hide');
-    }
+        // Hide the loading modal
+        function hideLoadingModal() {
+            $('#loadingModal').modal('hide');
+        }
 
-    $(function() {
-        $('#example1')
-            .DataTable({
-                responsive: true,
+        $(function () {
+            $('#example1')
+                .DataTable({
+                    responsive: true,
+                    lengthChange: false,
+                    autoWidth: false,
+                    buttons: ['copy', 'csv', 'excel', 'pdf', 'print', 'colvis'],
+                })
+                .buttons()
+                .container()
+                .appendTo('#example1_wrapper .col-md-6:eq(0)')
+            $('#example2').DataTable({
+                paging: true,
                 lengthChange: false,
+                searching: false,
+                ordering: true,
+                info: true,
                 autoWidth: false,
-                buttons: ['copy', 'csv', 'excel', 'pdf', 'print', 'colvis'],
+                responsive: true,
             })
-            .buttons()
-            .container()
-            .appendTo('#example1_wrapper .col-md-6:eq(0)')
-        $('#example2').DataTable({
-            paging: true,
-            lengthChange: false,
-            searching: false,
-            ordering: true,
-            info: true,
-            autoWidth: false,
-            responsive: true,
         })
-    })
     </script>
     </body>
 
