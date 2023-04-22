@@ -171,7 +171,7 @@
                             <div class="icon">
                                 <i class="fas fa fa-bus"></i>
                             </div>
-                            <a href="bus.php" class="small-box-footer">
+                            <a href="buses.php" class="small-box-footer">
                                 More info
                                 <i class="fas fa-arrow-circle-right"></i>
                             </a>
@@ -191,7 +191,7 @@
                             <div class="icon">
                                 <i class="fas fa fa-address-card"></i>
                             </div>
-                            <a href="driver.php" class="small-box-footer">
+                            <a href="drivers.php" class="small-box-footer">
                                 More info
                                 <i class="fas fa-arrow-circle-right"></i>
                             </a>
@@ -211,7 +211,7 @@
                             <div class="icon">
                                 <i class="fas fa fa-archive"></i>
                             </div>
-                            <a href="reservation.php" class="small-box-footer">
+                            <a href="reservations.php" class="small-box-footer">
                                 More info
                                 <i class="fas fa-arrow-circle-right"></i>
                             </a>
