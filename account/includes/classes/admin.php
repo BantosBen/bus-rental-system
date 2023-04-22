@@ -2,66 +2,55 @@
 
 require_once 'database.php';
 
-class Customer
+class Admin
 {
-    private $customerID;
+    private $adminID;
     private $connection;
 
     public function __construct()
     {
-        $this->customerID = $_SESSION['id'];
+        $this->adminID = $_SESSION['admin'];
         $db = new Database;
 
         $this->connection = $db->connection;
     }
 
-    public function getCurrentCustomer()
+    public function getCurrentAdmin()
     {
-        $sql = "SELECT * FROM `customer` WHERE `customer_id` = '$this->customerID'";
+        $sql = "SELECT * FROM `login` WHERE `user_id` = '$this->adminID'";
         $result = $this->connection->query($sql);
 
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
-                $customer = $row;
+                $admin = $row;
             }
-            return $customer;
+            return $admin;
         } else {
             return null;
         }
     }
 
-    private function isEmailExists($email, $table = "customer")
+    private function isEmailExists($email)
     {
-        $sql = "SELECT * FROM $table WHERE email_address='$email' AND `customer_id` != $this->customerID";
+        $sql = "SELECT * FROM `login` WHERE email_address='$email' AND `user_id` != $this->adminID";
         $result = $this->connection->query($sql);
 
         return $result > 0;
     }
 
-    public function updateCustomer($user)
+    public function update($user)
     {
         $message = [];
 
-        $id = $user['id'];
-        $firstName = $user['first_name'];
-        $lastName = $user['last_name'];
+        $name = $user['name'];
         $emailAddress = $user['email'];
-        $customerAddress = $user['address'];
         $phoneNumber = $user['phone'];
-        $city = $user['city'];
-        $state = $user['state'];
-        $zipCode = $user['zip'];
 
         if (!$this->isEmailExists($emailAddress)) {
-            $sql = "UPDATE `customer` SET
-            `first_name`='$firstName',
-            `last_name`='$lastName',
+            $sql = "UPDATE `login` SET
+            `name`='$name',
             `email_address`='$emailAddress',
-            `customer_address`='$customerAddress',
-            `phone_number`='$phoneNumber',
-            `city`='$city',
-            `state`='$state',
-            `zip_code`='$zipCode' WHERE `customer_id` = '$id'";
+            `phone_number`='$phoneNumber' WHERE `user_id` = '$this->adminID'";
 
             $result = $this->connection->query($sql);
 
@@ -89,9 +78,8 @@ class Customer
 
         if ($this->isPasswordValid($password)) {
             $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
-            $userId = $_SESSION['id'];
 
-            $sql = "UPDATE `customer` SET `customer_password`='$hashedPassword' WHERE `customer_id`='$userId'";
+            $sql = "UPDATE `login` SET `password`='$hashedPassword' WHERE `user_id`='$this->adminID'";
             $result = $this->connection->query($sql);
 
             if ($result > 0) {
@@ -113,61 +101,50 @@ class Customer
 
     private function isPasswordValid($password)
     {
-        $userId = $_SESSION['id'];
-        $sql_raw = "SELECT * FROM `customer` WHERE `customer_id` = '$userId'";
+        $sql_raw = "SELECT * FROM `login` WHERE `user_id` = '$this->adminID'";
         $result = $this->connection->query($sql_raw);
 
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 $user = $row;
             }
-            return password_verify($password, $user['customer_password']);
+            return password_verify($password, $user['password']);
         } else {
             return false;
         }
     }
 
-    public function getCount()
+    public function create($user)
     {
-        $sql = "SELECT * FROM `customer`";
-        $results = $this->connection->query($sql);
+        $message = [];
 
-        return $results->num_rows;
-    }
+        $name = $user['name'];
+        $password = $user['password'];
+        $emailAddress = $user['email'];
+        $phoneNumber = $user['phone'];
 
+        if (!$this->isEmailExists($emailAddress)) {
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+            $sql = "INSERT INTO `login`(`password`, `email_address`, `name`, `phone_number`)
+            VALUES ('$hashedPassword','$emailAddress','$name','$phoneNumber');";
 
-    public function getAll()
-    {
-        $sql = "SELECT * FROM `customer`";
-        $results = $this->connection->query($sql);
+            $result = $this->connection->query($sql);
 
-        if ($results->num_rows > 0) {
-            $customers = [];
-            while ($row = $results->fetch_assoc()) {
-                array_push($customers, $row);
+            if ($result > 0) {
+                $message['error'] = false;
+                $message['message'] = "Registration successful";
+
+            } else {
+                $message['error'] = true;
+                $message['message'] = "Something happened. Registration failed. Check and try again.";
+
             }
-
-            return $customers;
-        } else {
-            return null;
-        }
-    }
-
-
-    public function deleteCustomer($customerID)
-    {
-        $sql = "DELETE FROM `customer` WHERE `customer_id`='$customerID'";
-        $response = $this->connection->query($sql);
-
-        if ($response > 0) {
-            $message['error'] = false;
-            $message['message'] = "Customer deleted successful";
-
         } else {
             $message['error'] = true;
-            $message['message'] = "Something happened. update failed. Check and try again.";
-        }
+            $message['message'] = "Email address is already taken. Check and try again.";
 
-        return json_encode($message);
+        }
+        return json_decode(json_encode($message));
+
     }
 }

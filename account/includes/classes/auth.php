@@ -109,39 +109,6 @@ class Auth
         return json_decode(json_encode($message));
 
     }
-    public function createAdminAccount($user)
-    {
-        $message = [];
-
-        $name = $user['name'];
-        $password = $user['password'];
-        $emailAddress = $user['email'];
-        $phoneNumber = $user['phone'];
-
-        if (!$this->isEmailExists($emailAddress, 'login')) {
-            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-            $sql = "INSERT INTO `login`(`password`, `email_address`, `name`, `phone_number`)
-            VALUES ('$hashedPassword','$emailAddress','$name','$phoneNumber');";
-
-            $result = $this->connection->query($sql);
-
-            if ($result > 0) {
-                $message['error'] = false;
-                $message['message'] = "Registration successful";
-
-            } else {
-                $message['error'] = true;
-                $message['message'] = "Something happened. Registration failed. Check and try again.";
-
-            }
-        } else {
-            $message['error'] = true;
-            $message['message'] = "Email address is already taken. Check and try again.";
-
-        }
-        return json_decode(json_encode($message));
-
-    }
 
     private function isEmailExists($email, $table)
     {
