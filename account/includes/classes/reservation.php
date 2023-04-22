@@ -292,4 +292,20 @@ class Reservation
             return null;
         }
     }
+
+    public function getAllPayments()
+    {
+        $sql = "SELECT `payment`.*, `customer`.`first_name`, `customer`.`last_name` FROM `payment` JOIN `customer` ON `payment`.`customer_id` = `customer`.`customer_id`;";
+        $result = $this->connection->query($sql);
+
+        if ($result->num_rows > 0) {
+            $reviews = [];
+            while ($row = $result->fetch_assoc()) {
+                array_push($reviews, $row);
+            }
+            return $reviews;
+        } else {
+            return null;
+        }
+    }
 }
