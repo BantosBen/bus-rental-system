@@ -21,15 +21,7 @@
 
         <!-- Sidebar -->
         <div class="sidebar">
-            <!-- Sidebar user panel (optional) -->
-            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                <div class="image">
-                    <img src="dist/img/profile-img.jpg" class="img-circle elevation-2" alt="User Image" />
-                </div>
-                <div class="info">
-                    <a href="#" class="d-block">Alexander Pierce</a>
-                </div>
-            </div>
+            <?php include 'user_panel.php'; ?>
             <!-- Sidebar Menu -->
             <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
@@ -37,7 +29,7 @@
                     <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                     <li class="nav-item menu-open">
-                        <a href="#" class="nav-link">
+                        <a href="dashboard.php" class="nav-link">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
                                 Dashboard
@@ -46,7 +38,7 @@
                     </li>
                     <li class="nav-header">MANAGEMENT</li>
                     <li class="nav-item">
-                        <a href="pages/widgets.html" class="nav-link">
+                        <a href="customer.php" class="nav-link">
                             <i class="nav-icon fa fa-users"></i>
                             <p>
                                 Customer
@@ -54,7 +46,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="pages/widgets.html" class="nav-link active">
+                        <a href="buses.php" class="nav-link active">
                             <i class="nav-icon fa fa-bus"></i>
                             <p>
                                 Buses
@@ -62,7 +54,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="pages/widgets.html" class="nav-link">
+                        <a href="drivers.php" class="nav-link">
                             <i class="nav-icon fa fa-address-card"></i>
                             <p>
                                 Driver
@@ -71,7 +63,7 @@
                     </li>
                     <li class="nav-header">REVIEW</li>
                     <li class="nav-item">
-                        <a href="pages/widgets.html" class="nav-link">
+                        <a href="reservations.php" class="nav-link">
                             <i class="nav-icon fa fa-archive"></i>
                             <p>
                                 Reservations
@@ -79,7 +71,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="pages/widgets.html" class="nav-link">
+                        <a href="reviews.php" class="nav-link">
                             <i class="nav-icon fa fa-star"></i>
                             <p>
                                 Customer Reviews
@@ -87,7 +79,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="pages/widgets.html" class="nav-link">
+                        <a href="payments.php" class="nav-link">
                             <i class="nav-icon fa fa-credit-card"></i>
                             <p>
                                 Payments
@@ -96,7 +88,7 @@
                     </li>
                     <li class="nav-header">OTHERS</li>
                     <li class="nav-item">
-                        <a href="pages/widgets.html" class="nav-link">
+                        <a href="profile.php" class="nav-link">
                             <i class="nav-icon fa fa-user"></i>
                             <p>
                                 My Profile
@@ -104,7 +96,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="pages/widgets.html" class="nav-link">
+                        <a href="../logout.php" class="nav-link">
                             <i class="nav-icon fa fa-power-off"></i>
                             <p>
                                 Sign Out
@@ -176,61 +168,61 @@
                                     </thead>
                                     <tbody>
                                         <?php foreach ($busses as $mBus) { ?>
-                                        <tr>
-                                            <td>
-                                                <?php echo $mBus['bus_type'] ?>
-                                            </td>
-                                            <td>
-                                                <?php echo $mBus['manufacturer'] ?>
-                                            </td>
-                                            <td>
-                                                <?php echo $mBus['model'] ?>
-                                            </td>
-                                            <td>
-                                                <?php echo $mBus['year'] ?>
-                                            </td>
-                                            <td>
-                                                <?php echo $mBus['seating_capacity'] ?>
-                                            </td>
-                                            <td>
-                                                <?php echo $mBus['licenseplate_number'] ?>
-                                            </td>
-                                            <td>
-                                                <?php if ($mBus['availability'] == 2) { ?>
-                                                <small class="badge badge-danger">
-                                                    <i class="far fa-clock"></i>
-                                                    Not Available
-                                                </small>
-                                                <?php } else { ?>
-                                                <small class="badge badge-success">
-                                                    <i class="far fa-clock"></i>
-                                                    Available
-                                                </small>
-                                                <?php } ?>
-                                            </td>
-                                            <td>
-                                                <div class="row">
-                                                    <div class="col-6">
-                                                        <button type="button"
-                                                            class="btn btn-block btn-outline-primary btn-sm"
-                                                            data-toggle="modal"
-                                                            data-target="#modal-edit-<?php echo $mBus['bus_id'] ?>">
-                                                            <i class="fa fa-edit"></i>
-                                                            Edit
-                                                        </button>
+                                            <tr>
+                                                <td>
+                                                    <?php echo $mBus['bus_type'] ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $mBus['manufacturer'] ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $mBus['model'] ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $mBus['year'] ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $mBus['seating_capacity'] ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $mBus['licenseplate_number'] ?>
+                                                </td>
+                                                <td>
+                                                    <?php if ($mBus['availability'] == 2) { ?>
+                                                        <small class="badge badge-danger">
+                                                            <i class="far fa-clock"></i>
+                                                            Not Available
+                                                        </small>
+                                                    <?php } else { ?>
+                                                        <small class="badge badge-success">
+                                                            <i class="far fa-clock"></i>
+                                                            Available
+                                                        </small>
+                                                    <?php } ?>
+                                                </td>
+                                                <td>
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <button type="button"
+                                                                class="btn btn-block btn-outline-primary btn-sm"
+                                                                data-toggle="modal"
+                                                                data-target="#modal-edit-<?php echo $mBus['bus_id'] ?>">
+                                                                <i class="fa fa-edit"></i>
+                                                                Edit
+                                                            </button>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <button type="button"
+                                                                class="btn btn-block btn-outline-danger btn-sm"
+                                                                data-toggle="modal"
+                                                                data-target="#modal-delete-<?php echo $mBus['bus_id'] ?>">
+                                                                <i class="fa fa-trash"></i>
+                                                                Delete
+                                                            </button>
+                                                        </div>
                                                     </div>
-                                                    <div class="col-6">
-                                                        <button type="button"
-                                                            class="btn btn-block btn-outline-danger btn-sm"
-                                                            data-toggle="modal"
-                                                            data-target="#modal-delete-<?php echo $mBus['bus_id'] ?>">
-                                                            <i class="fa fa-trash"></i>
-                                                            Delete
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                                </td>
+                                            </tr>
                                         <?php } ?>
                                     </tbody>
                                     <tfoot>
@@ -344,125 +336,125 @@
 
         <?php foreach ($busses as $mBus) { ?>
 
-        <div class="modal fade" id="modal-edit-<?php echo $mBus['bus_id'] ?>">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Edit Bus Details</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <form method="post" action="" enctype="multipart/form-data">
-                        <input value="<?php echo $mBus['bus_id'] ?>" required type="hidden" name="edit_id"
-                            class="form-control" id="edit-id" placeholder="Enter Bus Type">
-                        <div class="modal-body row">
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label for="bus-type">Bus Type</label>
-                                    <input value="<?php echo $mBus['bus_type'] ?>" required type="text" name="bus-type"
-                                        class="form-control" id="bus-type" placeholder="Enter Bus Type">
+            <div class="modal fade" id="modal-edit-<?php echo $mBus['bus_id'] ?>">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Edit Bus Details</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form method="post" action="" enctype="multipart/form-data">
+                            <input value="<?php echo $mBus['bus_id'] ?>" required type="hidden" name="edit_id"
+                                class="form-control" id="edit-id" placeholder="Enter Bus Type">
+                            <div class="modal-body row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="bus-type">Bus Type</label>
+                                        <input value="<?php echo $mBus['bus_type'] ?>" required type="text" name="bus-type"
+                                            class="form-control" id="bus-type" placeholder="Enter Bus Type">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label for="manufacturer">Manufacturer</label>
-                                    <input value="<?php echo $mBus['manufacturer'] ?>" required type="text"
-                                        name="manufacturer" class="form-control" id="manufacturer"
-                                        placeholder="Enter Manufacturer">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="manufacturer">Manufacturer</label>
+                                        <input value="<?php echo $mBus['manufacturer'] ?>" required type="text"
+                                            name="manufacturer" class="form-control" id="manufacturer"
+                                            placeholder="Enter Manufacturer">
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label for="text">Model</label>
-                                    <input value="<?php echo $mBus['model'] ?>" required type="model" name="model"
-                                        class="form-control" id="model" placeholder="Enter Model">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="text">Model</label>
+                                        <input value="<?php echo $mBus['model'] ?>" required type="model" name="model"
+                                            class="form-control" id="model" placeholder="Enter Model">
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label for="fee">Fee</label>
-                                    <input value="<?php echo $mBus['fee'] ?>" required type="number" name="fee"
-                                        class="form-control" id="fee" placeholder="Enter Fee">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="fee">Fee</label>
+                                        <input value="<?php echo $mBus['fee'] ?>" required type="number" name="fee"
+                                            class="form-control" id="fee" placeholder="Enter Fee">
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <label for="year">Year</label>
-                                    <input value="<?php echo $mBus['year'] ?>" required type="text" name="year"
-                                        class="form-control" id="year" placeholder="Enter Year">
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="year">Year</label>
+                                        <input value="<?php echo $mBus['year'] ?>" required type="text" name="year"
+                                            class="form-control" id="year" placeholder="Enter Year">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <label for="capacity">Capacity</label>
-                                    <input value="<?php echo $mBus['seating_capacity'] ?>" required type="number"
-                                        name="capacity" class="form-control" id="capacity" placeholder="Enter Capacity">
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="capacity">Capacity</label>
+                                        <input value="<?php echo $mBus['seating_capacity'] ?>" required type="number"
+                                            name="capacity" class="form-control" id="capacity" placeholder="Enter Capacity">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <label for="plate-number">Plane Number</label>
-                                    <input value="<?php echo $mBus['licenseplate_number'] ?>" required type="text"
-                                        name="plate-number" class="form-control" id="plate-number"
-                                        placeholder="Enter Plate Number">
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="plate-number">Plane Number</label>
+                                        <input value="<?php echo $mBus['licenseplate_number'] ?>" required type="text"
+                                            name="plate-number" class="form-control" id="plate-number"
+                                            placeholder="Enter Plate Number">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input" name="bus_image" id="customFile">
-                                        <label class="custom-file-label" for="customFile">Choose Bus Image</label>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" name="bus_image" id="customFile">
+                                            <label class="custom-file-label" for="customFile">Choose Bus Image</label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <!-- /.card-body -->
-                        <div class="modal-footer justify-content-between">
-                            <button type="submit" class="btn btn-secondary">Save Changes</button>
-                        </div>
-                    </form>
-                </div>
-                <!-- /.modal-content -->
-            </div>
-            <!-- /.modal-dialog -->
-        </div>
-
-
-
-        <div class="modal fade" id="modal-delete-<?php echo $mBus['bus_id']; ?>">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Delete Bus</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <form method="post" action="">
-                        <div class="modal-body row">
-                            <div class="col-12">
-                                <p>Do you wish to delete
-                                    <b>
-                                        <?php echo $mBus['bus_type'] . ' ' . $mBus['manufacturer']; ?>
-                                    </b>
-                                </p>
+                            <!-- /.card-body -->
+                            <div class="modal-footer justify-content-between">
+                                <button type="submit" class="btn btn-secondary">Save Changes</button>
                             </div>
-                            <input value="<?php echo $mBus['bus_id'] ?>" required type="hidden" name="delete_id"
-                                class="form-control" id="delete_id">
-                        </div>
-                        <div class="modal-footer justify-content-between">
-                            <button type="submit" class="btn btn-danger">Delete Bus</button>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
+                    <!-- /.modal-content -->
                 </div>
-                <!-- /.modal-content -->
+                <!-- /.modal-dialog -->
             </div>
-            <!-- /.modal-dialog -->
-        </div>
+
+
+
+            <div class="modal fade" id="modal-delete-<?php echo $mBus['bus_id']; ?>">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Delete Bus</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form method="post" action="">
+                            <div class="modal-body row">
+                                <div class="col-12">
+                                    <p>Do you wish to delete
+                                        <b>
+                                            <?php echo $mBus['bus_type'] . ' ' . $mBus['manufacturer']; ?>
+                                        </b>
+                                    </p>
+                                </div>
+                                <input value="<?php echo $mBus['bus_id'] ?>" required type="hidden" name="delete_id"
+                                    class="form-control" id="delete_id">
+                            </div>
+                            <div class="modal-footer justify-content-between">
+                                <button type="submit" class="btn btn-danger">Delete Bus</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
 
         <?php } ?>
         <!-- /.content -->
@@ -470,29 +462,29 @@
     <?php include 'footer.php'; ?>
     <!-- Page specific script -->
     <script>
-    // Set the text content of the HTML element to the current year
-    document.getElementById('current-year').textContent = currentYear
-    $(function() {
-        $('#example1')
-            .DataTable({
-                responsive: true,
+        // Set the text content of the HTML element to the current year
+        document.getElementById('current-year').textContent = currentYear
+        $(function () {
+            $('#example1')
+                .DataTable({
+                    responsive: true,
+                    lengthChange: false,
+                    autoWidth: false,
+                    buttons: ['copy', 'csv', 'excel', 'pdf', 'print', 'colvis'],
+                })
+                .buttons()
+                .container()
+                .appendTo('#example1_wrapper .col-md-6:eq(0)')
+            $('#example2').DataTable({
+                paging: true,
                 lengthChange: false,
+                searching: false,
+                ordering: true,
+                info: true,
                 autoWidth: false,
-                buttons: ['copy', 'csv', 'excel', 'pdf', 'print', 'colvis'],
+                responsive: true,
             })
-            .buttons()
-            .container()
-            .appendTo('#example1_wrapper .col-md-6:eq(0)')
-        $('#example2').DataTable({
-            paging: true,
-            lengthChange: false,
-            searching: false,
-            ordering: true,
-            info: true,
-            autoWidth: false,
-            responsive: true,
         })
-    })
     </script>
     </body>
 

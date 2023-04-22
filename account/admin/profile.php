@@ -10,7 +10,6 @@
 
     <?php include 'stylesheets.php'; ?>
     <!-- /.navbar -->
-
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
@@ -22,23 +21,15 @@
 
         <!-- Sidebar -->
         <div class="sidebar">
-            <!-- Sidebar user panel (optional) -->
-            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                <div class="image">
-                    <img src="dist/img/profile-img.jpg" class="img-circle elevation-2" alt="User Image" />
-                </div>
-                <div class="info">
-                    <a href="#" class="d-block">Alexander Pierce</a>
-                </div>
-            </div>
+            <?php include 'user_panel.php'; ?>
             <!-- Sidebar Menu -->
             <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                     data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
+                   with font-awesome or any other icon font library -->
                     <li class="nav-item menu-open">
-                        <a href="#" class="nav-link">
+                        <a href="dashboard.php" class="nav-link">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
                                 Dashboard
@@ -47,7 +38,7 @@
                     </li>
                     <li class="nav-header">MANAGEMENT</li>
                     <li class="nav-item">
-                        <a href="pages/widgets.html" class="nav-link">
+                        <a href="customer.php" class="nav-link">
                             <i class="nav-icon fa fa-users"></i>
                             <p>
                                 Customer
@@ -55,7 +46,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="pages/widgets.html" class="nav-link">
+                        <a href="buses.php" class="nav-link">
                             <i class="nav-icon fa fa-bus"></i>
                             <p>
                                 Buses
@@ -63,7 +54,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="pages/widgets.html" class="nav-link">
+                        <a href="drivers.php" class="nav-link">
                             <i class="nav-icon fa fa-address-card"></i>
                             <p>
                                 Driver
@@ -72,7 +63,7 @@
                     </li>
                     <li class="nav-header">REVIEW</li>
                     <li class="nav-item">
-                        <a href="pages/widgets.html" class="nav-link">
+                        <a href="reservations.php" class="nav-link">
                             <i class="nav-icon fa fa-archive"></i>
                             <p>
                                 Reservations
@@ -80,7 +71,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="pages/widgets.html" class="nav-link">
+                        <a href="reviews.php" class="nav-link">
                             <i class="nav-icon fa fa-star"></i>
                             <p>
                                 Customer Reviews
@@ -88,7 +79,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="pages/widgets.html" class="nav-link">
+                        <a href="payments.php" class="nav-link">
                             <i class="nav-icon fa fa-credit-card"></i>
                             <p>
                                 Payments
@@ -97,7 +88,7 @@
                     </li>
                     <li class="nav-header">OTHERS</li>
                     <li class="nav-item">
-                        <a href="pages/widgets.html" class="nav-link active">
+                        <a href="profile.php" class="nav-link active">
                             <i class="nav-icon fa fa-user"></i>
                             <p>
                                 My Profile
@@ -105,7 +96,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="pages/widgets.html" class="nav-link">
+                        <a href="../logout.php" class="nav-link">
                             <i class="nav-icon fa fa-power-off"></i>
                             <p>
                                 Sign Out
@@ -152,9 +143,12 @@
                                         alt="User profile picture" />
                                 </div>
 
-                                <h3 class="profile-username text-center"><?php echo $adminProfile['name']?></h3>
+                                <h3 class="profile-username text-center">
+                                    <?php echo $adminProfile['name'] ?>
+                                </h3>
 
-                                <p class="text-muted text-center">Administrator ID <?php echo $adminProfile['user_id']?>
+                                <p class="text-muted text-center">Administrator ID
+                                    <?php echo $adminProfile['user_id'] ?>
                                 </p>
                             </div>
                             <!-- /.card-body -->

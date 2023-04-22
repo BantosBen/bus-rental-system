@@ -20,23 +20,15 @@
 
         <!-- Sidebar -->
         <div class="sidebar">
-            <!-- Sidebar user panel (optional) -->
-            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                <div class="image">
-                    <img src="dist/img/profile-img.jpg" class="img-circle elevation-2" alt="User Image" />
-                </div>
-                <div class="info">
-                    <a href="#" class="d-block">Alexander Pierce</a>
-                </div>
-            </div>
+            <?php include 'user_panel.php'; ?>
             <!-- Sidebar Menu -->
             <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                     data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
+                   with font-awesome or any other icon font library -->
                     <li class="nav-item menu-open">
-                        <a href="#" class="nav-link">
+                        <a href="dashboard.php" class="nav-link">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
                                 Dashboard
@@ -45,7 +37,7 @@
                     </li>
                     <li class="nav-header">MANAGEMENT</li>
                     <li class="nav-item">
-                        <a href="pages/widgets.html" class="nav-link">
+                        <a href="customer.php" c lass="nav-link">
                             <i class="nav-icon fa fa-users"></i>
                             <p>
                                 Customer
@@ -53,7 +45,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="pages/widgets.html" class="nav-link">
+                        <a href="buses.php" class="nav-link">
                             <i class="nav-icon fa fa-bus"></i>
                             <p>
                                 Buses
@@ -61,7 +53,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="pages/widgets.html" class="nav-link">
+                        <a href="drivers.php" class="nav-link">
                             <i class="nav-icon fa fa-address-card"></i>
                             <p>
                                 Driver
@@ -70,7 +62,7 @@
                     </li>
                     <li class="nav-header">REVIEW</li>
                     <li class="nav-item">
-                        <a href="pages/widgets.html" class="nav-link">
+                        <a href="reservations.php" class="nav-link">
                             <i class="nav-icon fa fa-archive"></i>
                             <p>
                                 Reservations
@@ -78,7 +70,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="pages/widgets.html" class="nav-link active">
+                        <a href="reviews.php" class="nav-link active">
                             <i class="nav-icon fa fa-star"></i>
                             <p>
                                 Customer Reviews
@@ -86,7 +78,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="pages/widgets.html" class="nav-link">
+                        <a href="payments.php" class="nav-link">
                             <i class="nav-icon fa fa-credit-card"></i>
                             <p>
                                 Payments
@@ -95,7 +87,7 @@
                     </li>
                     <li class="nav-header">OTHERS</li>
                     <li class="nav-item">
-                        <a href="pages/widgets.html" class="nav-link">
+                        <a href="profile.php" class="nav-link">
                             <i class="nav-icon fa fa-user"></i>
                             <p>
                                 My Profile
@@ -103,7 +95,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="pages/widgets.html" class="nav-link">
+                        <a href="../logout. php" class="nav-link">
                             <i class="nav-icon fa fa-power-off"></i>
                             <p>
                                 Sign Out
@@ -164,27 +156,27 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                      <?php foreach ($reviews as $review) { ?>
-                                        <tr>
-                                            <td>
-                                                <?php echo $review['review_id']; ?>
-                                            </td>
-                                            <td>
-                                                <?php echo $review['bus_type']; ?>
-                                            </td>
-                                            <td>
-                                                <?php echo $review['manufacturer']; ?>
-                                            </td>
-                                            <td>
-                                                <?php echo $review['rating']; ?>
-                                            </td>
-                                            <td>
-                                                <?php echo $review['review_text']; ?>
-                                            </td>
-                                            <td>
-                                                <?php echo $review['review_date']; ?>
-                                            </td>
-                                          </tr>
+                                        <?php foreach ($reviews as $review) { ?>
+                                            <tr>
+                                                <td>
+                                                    <?php echo $review['review_id']; ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $review['bus_type']; ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $review['manufacturer']; ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $review['rating']; ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $review['review_text']; ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $review['review_date']; ?>
+                                                </td>
+                                            </tr>
                                         <?php } ?>
 
                                     </tbody>
@@ -214,29 +206,29 @@
     <?php include 'footer.php'; ?>
 
     <script>
-    // Set the text content of the HTML element to the current year
-    document.getElementById('current-year').textContent = currentYear
-    $(function() {
-        $('#example1')
-            .DataTable({
-                responsive: true,
+        // Set the text content of the HTML element to the current year
+        document.getElementById('current-year').textContent = currentYear
+        $(function () {
+            $('#example1')
+                .DataTable({
+                    responsive: true,
+                    lengthChange: false,
+                    autoWidth: false,
+                    buttons: ['copy', 'csv', 'excel', 'pdf', 'print', 'colvis'],
+                })
+                .buttons()
+                .container()
+                .appendTo('#example1_wrapper .col-md-6:eq(0)')
+            $('#example2').DataTable({
+                paging: true,
                 lengthChange: false,
+                searching: false,
+                ordering: true,
+                info: true,
                 autoWidth: false,
-                buttons: ['copy', 'csv', 'excel', 'pdf', 'print', 'colvis'],
+                responsive: true,
             })
-            .buttons()
-            .container()
-            .appendTo('#example1_wrapper .col-md-6:eq(0)')
-        $('#example2').DataTable({
-            paging: true,
-            lengthChange: false,
-            searching: false,
-            ordering: true,
-            info: true,
-            autoWidth: false,
-            responsive: true,
         })
-    })
     </script>
     </body>
 

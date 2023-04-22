@@ -20,23 +20,15 @@
 
         <!-- Sidebar -->
         <div class="sidebar">
-            <!-- Sidebar user panel (optional) -->
-            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                <div class="image">
-                    <img src="dist/img/profile-img.jpg" class="img-circle elevation-2" alt="User Image" />
-                </div>
-                <div class="info">
-                    <a href="#" class="d-block">Alexander Pierce</a>
-                </div>
-            </div>
+            <?php include 'user_panel.php'; ?>
             <!-- Sidebar Menu -->
             <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                     data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
+                       with font-awesome or any other icon font library -->
                     <li class="nav-item menu-open">
-                        <a href="#" class="nav-link active">
+                        <a href="dashboard.php" class="nav-link active">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
                                 Dashboard
@@ -45,7 +37,7 @@
                     </li>
                     <li class="nav-header">MANAGEMENT</li>
                     <li class="nav-item">
-                        <a href="pages/widgets.html" class="nav-link">
+                        <a href="customer.php" class="nav-link">
                             <i class="nav-icon fa fa-users"></i>
                             <p>
                                 Customer
@@ -53,7 +45,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="pages/widgets.html" class="nav-link">
+                        <a href="buses.php" class="nav-link">
                             <i class="nav-icon fa fa-bus"></i>
                             <p>
                                 Buses
@@ -61,7 +53,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="pages/widgets.html" class="nav-link">
+                        <a href="drivers.php" class="nav-link">
                             <i class="nav-icon fa fa-address-card"></i>
                             <p>
                                 Driver
@@ -70,7 +62,7 @@
                     </li>
                     <li class="nav-header">REVIEW</li>
                     <li class="nav-item">
-                        <a href="pages/widgets.html" class="nav-link">
+                        <a href="reservations.php" class="nav-link">
                             <i class="nav-icon fa fa-archive"></i>
                             <p>
                                 Reservations
@@ -78,7 +70,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="pages/widgets.html" class="nav-link">
+                        <a href="reviews.php" class="nav-link">
                             <i class="nav-icon fa fa-star"></i>
                             <p>
                                 Customer Reviews
@@ -86,7 +78,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="pages/widgets.html" class="nav-link">
+                        <a href="payments.php" class="nav-link">
                             <i class="nav-icon fa fa-credit-card"></i>
                             <p>
                                 Payments
@@ -95,7 +87,7 @@
                     </li>
                     <li class="nav-header">OTHERS</li>
                     <li class="nav-item">
-                        <a href="pages/widgets.html" class="nav-link">
+                        <a href="profile.php" class="nav-link">
                             <i class="nav-icon fa fa-user"></i>
                             <p>
                                 My Profile
@@ -103,7 +95,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="pages/widgets.html" class="nav-link">
+                        <a href="../logout.php" class="nav-link">
                             <i class="nav-icon fa fa-power-off"></i>
                             <p>
                                 Sign Out
@@ -249,23 +241,23 @@
                                     </thead>
                                     <tbody>
                                         <?php foreach ($topBuses as $topBus) { ?>
-                                        <tr>
-                                            <td>
-                                                <?php echo $topBus['bus_id'] ?>
-                                            </td>
-                                            <td>
-                                                <?php echo $topBus['manufacturer'] ?>
-                                            </td>
-                                            <td>
-                                                <?php echo $topBus['model'] ?>
-                                            </td>
-                                            <td>
-                                                <?php echo $topBus['licenseplate_number'] ?>
-                                            </td>
-                                            <td>
-                                                <?php echo $topBus['avg_rating'] ?>
-                                            </td>
-                                        </tr>
+                                            <tr>
+                                                <td>
+                                                    <?php echo $topBus['bus_id'] ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $topBus['manufacturer'] ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $topBus['model'] ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $topBus['licenseplate_number'] ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $topBus['avg_rating'] ?>
+                                                </td>
+                                            </tr>
                                         <?php } ?>
                                     </tbody>
                                 </table>
@@ -292,23 +284,23 @@
                                     </thead>
                                     <tbody>
                                         <?php foreach ($activeReservations as $activeReservation) { ?>
-                                        <tr>
-                                            <td>
-                                                <?php echo $activeReservation['reservation_id'] ?>
-                                            </td>
-                                            <td>
-                                                <?php echo $activeReservation['bus_type'] . ' - ' . $activeReservation['manufacturer']; ?>
-                                            </td>
-                                            <td>
-                                                <?php echo $activeReservation['departure_date'] . ' ' . $activeReservation['departure_time']; ?>
-                                            </td>
-                                            <td>
-                                                <?php echo $activeReservation['arrival_date'] . ' ' . $activeReservation['arrival_time']; ?>
-                                            </td>
-                                            <td>
-                                                <?php echo $activeReservation['departure_location'] . ' - ' . $activeReservation['arrival_location']; ?>
-                                            </td>
-                                        </tr>
+                                            <tr>
+                                                <td>
+                                                    <?php echo $activeReservation['reservation_id'] ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $activeReservation['bus_type'] . ' - ' . $activeReservation['manufacturer']; ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $activeReservation['departure_date'] . ' ' . $activeReservation['departure_time']; ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $activeReservation['arrival_date'] . ' ' . $activeReservation['arrival_time']; ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $activeReservation['departure_location'] . ' - ' . $activeReservation['arrival_location']; ?>
+                                                </td>
+                                            </tr>
                                         <?php } ?>
                                     </tbody>
                                 </table>

@@ -20,23 +20,15 @@
 
         <!-- Sidebar -->
         <div class="sidebar">
-            <!-- Sidebar user panel (optional) -->
-            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                <div class="image">
-                    <img src="dist/img/profile-img.jpg" class="img-circle elevation-2" alt="User Image" />
-                </div>
-                <div class="info">
-                    <a href="#" class="d-block">Alexander Pierce</a>
-                </div>
-            </div>
+            <?php include 'user_panel.php'; ?>
             <!-- Sidebar Menu -->
             <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                     data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
+                   with font-awesome or any other icon font library -->
                     <li class="nav-item menu-open">
-                        <a href="#" class="nav-link">
+                        <a href="dashboard.php" class="nav-link">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
                                 Dashboard
@@ -45,7 +37,7 @@
                     </li>
                     <li class="nav-header">MANAGEMENT</li>
                     <li class="nav-item">
-                        <a href="pages/widgets.html" class="nav-link">
+                        <a href="customer.php" c lass="nav-link">
                             <i class="nav-icon fa fa-users"></i>
                             <p>
                                 Customer
@@ -53,7 +45,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="pages/widgets.html" class="nav-link">
+                        <a href="buses.php" class="nav-link">
                             <i class="nav-icon fa fa-bus"></i>
                             <p>
                                 Buses
@@ -61,7 +53,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="pages/widgets.html" class="nav-link">
+                        <a href="drivers.php" class="nav-link">
                             <i class="nav-icon fa fa-address-card"></i>
                             <p>
                                 Driver
@@ -70,7 +62,7 @@
                     </li>
                     <li class="nav-header">REVIEW</li>
                     <li class="nav-item">
-                        <a href="pages/widgets.html" class="nav-link active">
+                        <a href="reservations.php" class="nav-link active">
                             <i class="nav-icon fa fa-archive"></i>
                             <p>
                                 Reservations
@@ -78,7 +70,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="pages/widgets.html" class="nav-link">
+                        <a href="reviews.php" class="nav-link">
                             <i class="nav-icon fa fa-star"></i>
                             <p>
                                 Customer Reviews
@@ -86,7 +78,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="pages/widgets.html" class="nav-link">
+                        <a href="payments.php" class="nav-link">
                             <i class="nav-icon fa fa-credit-card"></i>
                             <p>
                                 Payments
@@ -95,7 +87,7 @@
                     </li>
                     <li class="nav-header">OTHERS</li>
                     <li class="nav-item">
-                        <a href="pages/widgets.html" class="nav-link">
+                        <a href="profile.php" class="nav-link">
                             <i class="nav-icon fa fa-user"></i>
                             <p>
                                 My Profile
@@ -103,7 +95,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="pages/widgets.html" class="nav-link">
+                        <a href="../logout. php" class="nav-link">
                             <i class="nav-icon fa fa-power-off"></i>
                             <p>
                                 Sign Out
@@ -167,42 +159,42 @@
                                     </thead>
                                     <tbody>
                                         <?php foreach ($reservations as $mReservation) { ?>
-                                        <tr>
-                                            <td>
-                                                <?php echo $mReservation['first_name'] . ' ' . $mReservation['last_name'] ?>
-                                            </td>
-                                            <td>
-                                                <?php echo $mReservation['phone_number'] ?>
-                                            </td>
-                                            <td>
-                                                <?php echo $mReservation['bus_type'] ?>
-                                            </td>
-                                            <td>
-                                                <?php echo $mReservation['departure_date'] . ' | ' . $mReservation['departure_time'] ?>
-                                            </td>
-                                            <td>
-                                                <?php echo $mReservation['arrival_date'] . ' | ' . $mReservation['arrival_time'] ?>
-                                            </td>
-                                            <td>
-                                                <?php echo $mReservation['departure_location'] . ' - ' . $mReservation['arrival_location'] ?>
-                                            </td>
-                                            <td>
-                                                <?php echo $mReservation['payment_total'] ?>
-                                            </td>
-                                            <td>
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <button type="button"
-                                                            class="btn btn-block btn-outline-danger btn-sm"
-                                                            data-toggle="modal"
-                                                            data-target="#modal-cancel-<?php echo $mReservation['reservation_id'] ?>">
-                                                            <i class="fa fa-close"></i>
-                                                            Cancel
-                                                        </button>
+                                            <tr>
+                                                <td>
+                                                    <?php echo $mReservation['first_name'] . ' ' . $mReservation['last_name'] ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $mReservation['phone_number'] ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $mReservation['bus_type'] ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $mReservation['departure_date'] . ' | ' . $mReservation['departure_time'] ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $mReservation['arrival_date'] . ' | ' . $mReservation['arrival_time'] ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $mReservation['departure_location'] . ' - ' . $mReservation['arrival_location'] ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $mReservation['payment_total'] ?>
+                                                </td>
+                                                <td>
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <button type="button"
+                                                                class="btn btn-block btn-outline-danger btn-sm"
+                                                                data-toggle="modal"
+                                                                data-target="#modal-cancel-<?php echo $mReservation['reservation_id'] ?>">
+                                                                <i class="fa fa-close"></i>
+                                                                Cancel
+                                                            </button>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                                </td>
+                                            </tr>
                                         <?php } ?>
 
                                     </tbody>
@@ -231,64 +223,64 @@
         <!-- /.content -->
         <?php foreach ($reservations as $mReservation) { ?>
 
-        <div class="modal fade" id="modal-cancel-<?php echo $mReservation['reservation_id']; ?>">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Terminate Reservation</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <form method="post" action="">
-                        <div class="modal-body row">
-                            <div class="col-12">
-                                <p>Do you wish to terminate reservation for
-                                    <b>
-                                        <?php echo $mReservation['first_name'] . ' ' . $mReservation['last_name']; ?>
-                                    </b>
-                                </p>
+            <div class="modal fade" id="modal-cancel-<?php echo $mReservation['reservation_id']; ?>">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Terminate Reservation</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form method="post" action="">
+                            <div class="modal-body row">
+                                <div class="col-12">
+                                    <p>Do you wish to terminate reservation for
+                                        <b>
+                                            <?php echo $mReservation['first_name'] . ' ' . $mReservation['last_name']; ?>
+                                        </b>
+                                    </p>
+                                </div>
+                                <input value="<?php echo $mReservation['reservation_id'] ?>" required type="hidden"
+                                    name="cancel_id" class="form-control" id="cancel_id">
                             </div>
-                            <input value="<?php echo $mReservation['reservation_id'] ?>" required type="hidden"
-                                name="cancel_id" class="form-control" id="cancel_id">
-                        </div>
-                        <div class="modal-footer justify-content-between">
-                            <button type="submit" class="btn btn-danger">Terminate</button>
-                        </div>
-                    </form>
+                            <div class="modal-footer justify-content-between">
+                                <button type="submit" class="btn btn-danger">Terminate</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.modal-content -->
                 </div>
-                <!-- /.modal-content -->
+                <!-- /.modal-dialog -->
             </div>
-            <!-- /.modal-dialog -->
-        </div>
 
         <?php } ?>
     </div>
     <?php include 'footer.php'; ?>
     <script>
-    // Set the text content of the HTML element to the current year
-    document.getElementById('current-year').textContent = currentYear
-    $(function() {
-        $('#example1')
-            .DataTable({
-                responsive: true,
+        // Set the text content of the HTML element to the current year
+        document.getElementById('current-year').textContent = currentYear
+        $(function () {
+            $('#example1')
+                .DataTable({
+                    responsive: true,
+                    lengthChange: false,
+                    autoWidth: false,
+                    buttons: ['copy', 'csv', 'excel', 'pdf', 'print', 'colvis'],
+                })
+                .buttons()
+                .container()
+                .appendTo('#example1_wrapper .col-md-6:eq(0)')
+            $('#example2').DataTable({
+                paging: true,
                 lengthChange: false,
+                searching: false,
+                ordering: true,
+                info: true,
                 autoWidth: false,
-                buttons: ['copy', 'csv', 'excel', 'pdf', 'print', 'colvis'],
+                responsive: true,
             })
-            .buttons()
-            .container()
-            .appendTo('#example1_wrapper .col-md-6:eq(0)')
-        $('#example2').DataTable({
-            paging: true,
-            lengthChange: false,
-            searching: false,
-            ordering: true,
-            info: true,
-            autoWidth: false,
-            responsive: true,
         })
-    })
     </script>
     </body>
 
